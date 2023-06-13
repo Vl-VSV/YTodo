@@ -59,3 +59,41 @@ final class FileCache {
         todoItems = array.compactMap({TodoItem.parse(json: $0)})
     }
 }
+
+// MARK: - FileCache CSV extension
+extension FileCache {
+    func loadCSV(from file: String) throws {
+        guard let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            throw FileCacheErrors.noSuchFileOrDirectory
+        }
+        let path = dir.appending(path: file)
+        
+        guard let csvString = try? String(contentsOf: path) else {
+            throw FileCacheErrors.upparsableData
+        }
+        
+        let rows = csvString.components(separatedBy: "\n")
+        
+        for rowIndex in 1 ..< rows.count {
+            if let todoItem = TodoItem.parse(csv: rows[rowIndex]) {
+                todoItems.append(todoItem)
+            }
+        }
+    }
+    
+    func saveCSV(to file: String) throws {
+        guard let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            throw FileCacheErrors.noSuchFileOrDirectory
+        }
+        
+        let path = dir.appending(path: file)
+        
+        var dataString = "id,text,priority,deadline,isCompleted,dateOfCreation,dateOfChange"
+        for item in todoItems {
+            dataString += item.csv
+        }
+        let data = Data(dataString.utf8)
+        try data.write(to: path)
+    }
+}
+

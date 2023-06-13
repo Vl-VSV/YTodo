@@ -38,6 +38,7 @@ struct TodoItem {
     }
 }
 
+// MARK: - TodoItem JSON extension
 extension TodoItem {
     
     // MARK: - Deserialization
@@ -93,6 +94,67 @@ extension TodoItem {
             result["dateOfChange"] = Double(dateOfChange.timeIntervalSince1970)
         }
         
+        return result
+    }
+}
+
+// MARK: - TodoItem CSV extension
+extension TodoItem {
+    static func parse(csv: Any) -> TodoItem? {
+        guard let csv = csv as? String else {
+            return nil
+        }
+        
+        let fields = csv.components(separatedBy: ",")
+        
+        guard fields.count == 7  else {
+            return nil
+        }
+        
+        let id = fields[0]
+        let text = fields[1]
+        let priorityString = fields[2]
+        let deadlineString = fields[3]
+        let isCompletedString = fields[4]
+        let dateOfCreationString = fields[5]
+        let dateOfChangeString = fields[6]
+        
+        let priority = Priority(rawValue: priorityString) ?? .normal
+        let isCompleted = isCompletedString.lowercased() == "true"
+        
+        guard let dateOfCreationDoubleValue = Double(dateOfCreationString) else {
+            return nil
+        }
+        let dateOfCreation = Date(timeIntervalSince1970: dateOfCreationDoubleValue)
+        
+        var deadline: Date? = nil
+        if let deadlineDoubleValue = Double(deadlineString) {
+            deadline = Date(timeIntervalSince1970: deadlineDoubleValue)
+        }
+        
+        var dateOfChange: Date? = nil
+        if let dateOfChangeDoubleValue = Double(dateOfChangeString) {
+            dateOfChange = Date(timeIntervalSince1970: dateOfChangeDoubleValue)
+        }
+        
+        return TodoItem(id: id, text: text, priority: priority, deadline: deadline, isCompleted: isCompleted, dateOfCreation: dateOfCreation, dateOfChange: dateOfChange)
+        
+    }
+    
+    var csv: String {
+        var result = ""
+        
+        result += "\n" + id + "," + text + "," + priority.rawValue + ","
+        
+        if let deadline = deadline {
+            result += String(deadline.timeIntervalSince1970) + ","
+        } else {
+            result += ","
+        }
+        result += String(isCompleted) + "," + String(dateOfCreation.timeIntervalSince1970) + ","
+        if let dateOfChange = dateOfChange {
+            result += String(dateOfChange.timeIntervalSince1970)
+        }
         return result
     }
 }
