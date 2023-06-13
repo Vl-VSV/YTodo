@@ -1,0 +1,607 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A439D4792A38E92D0098C35C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439D4782A38E92D0098C35C /* AppDelegate.swift */; };
+		A439D47B2A38E92D0098C35C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439D47A2A38E92D0098C35C /* SceneDelegate.swift */; };
+		A439D47D2A38E92D0098C35C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439D47C2A38E92D0098C35C /* ViewController.swift */; };
+		A439D4802A38E92D0098C35C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A439D47E2A38E92D0098C35C /* Main.storyboard */; };
+		A439D4822A38E92E0098C35C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A439D4812A38E92E0098C35C /* Assets.xcassets */; };
+		A439D4852A38E92E0098C35C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A439D4832A38E92E0098C35C /* LaunchScreen.storyboard */; };
+		A439D4902A38E92F0098C35C /* YTodoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439D48F2A38E92F0098C35C /* YTodoTests.swift */; };
+		A439D49A2A38E92F0098C35C /* YTodoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439D4992A38E92F0098C35C /* YTodoUITests.swift */; };
+		A439D49C2A38E92F0098C35C /* YTodoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439D49B2A38E92F0098C35C /* YTodoUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A439D48C2A38E92F0098C35C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A439D46D2A38E92D0098C35C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A439D4742A38E92D0098C35C;
+			remoteInfo = YTodo;
+		};
+		A439D4962A38E92F0098C35C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A439D46D2A38E92D0098C35C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A439D4742A38E92D0098C35C;
+			remoteInfo = YTodo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A439D4752A38E92D0098C35C /* YTodo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YTodo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A439D4782A38E92D0098C35C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A439D47A2A38E92D0098C35C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		A439D47C2A38E92D0098C35C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A439D47F2A38E92D0098C35C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A439D4812A38E92E0098C35C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A439D4842A38E92E0098C35C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A439D4862A38E92E0098C35C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A439D48B2A38E92F0098C35C /* YTodoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YTodoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A439D48F2A38E92F0098C35C /* YTodoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTodoTests.swift; sourceTree = "<group>"; };
+		A439D4952A38E92F0098C35C /* YTodoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YTodoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A439D4992A38E92F0098C35C /* YTodoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTodoUITests.swift; sourceTree = "<group>"; };
+		A439D49B2A38E92F0098C35C /* YTodoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTodoUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A439D4722A38E92D0098C35C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A439D4882A38E92F0098C35C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A439D4922A38E92F0098C35C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A439D46C2A38E92D0098C35C = {
+			isa = PBXGroup;
+			children = (
+				A439D4772A38E92D0098C35C /* YTodo */,
+				A439D48E2A38E92F0098C35C /* YTodoTests */,
+				A439D4982A38E92F0098C35C /* YTodoUITests */,
+				A439D4762A38E92D0098C35C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A439D4762A38E92D0098C35C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A439D4752A38E92D0098C35C /* YTodo.app */,
+				A439D48B2A38E92F0098C35C /* YTodoTests.xctest */,
+				A439D4952A38E92F0098C35C /* YTodoUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A439D4772A38E92D0098C35C /* YTodo */ = {
+			isa = PBXGroup;
+			children = (
+				A439D4782A38E92D0098C35C /* AppDelegate.swift */,
+				A439D47A2A38E92D0098C35C /* SceneDelegate.swift */,
+				A439D47C2A38E92D0098C35C /* ViewController.swift */,
+				A439D47E2A38E92D0098C35C /* Main.storyboard */,
+				A439D4812A38E92E0098C35C /* Assets.xcassets */,
+				A439D4832A38E92E0098C35C /* LaunchScreen.storyboard */,
+				A439D4862A38E92E0098C35C /* Info.plist */,
+			);
+			path = YTodo;
+			sourceTree = "<group>";
+		};
+		A439D48E2A38E92F0098C35C /* YTodoTests */ = {
+			isa = PBXGroup;
+			children = (
+				A439D48F2A38E92F0098C35C /* YTodoTests.swift */,
+			);
+			path = YTodoTests;
+			sourceTree = "<group>";
+		};
+		A439D4982A38E92F0098C35C /* YTodoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				A439D4992A38E92F0098C35C /* YTodoUITests.swift */,
+				A439D49B2A38E92F0098C35C /* YTodoUITestsLaunchTests.swift */,
+			);
+			path = YTodoUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A439D4742A38E92D0098C35C /* YTodo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A439D49F2A38E92F0098C35C /* Build configuration list for PBXNativeTarget "YTodo" */;
+			buildPhases = (
+				A439D4712A38E92D0098C35C /* Sources */,
+				A439D4722A38E92D0098C35C /* Frameworks */,
+				A439D4732A38E92D0098C35C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = YTodo;
+			productName = YTodo;
+			productReference = A439D4752A38E92D0098C35C /* YTodo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A439D48A2A38E92F0098C35C /* YTodoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A439D4A22A38E92F0098C35C /* Build configuration list for PBXNativeTarget "YTodoTests" */;
+			buildPhases = (
+				A439D4872A38E92F0098C35C /* Sources */,
+				A439D4882A38E92F0098C35C /* Frameworks */,
+				A439D4892A38E92F0098C35C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A439D48D2A38E92F0098C35C /* PBXTargetDependency */,
+			);
+			name = YTodoTests;
+			productName = YTodoTests;
+			productReference = A439D48B2A38E92F0098C35C /* YTodoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A439D4942A38E92F0098C35C /* YTodoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A439D4A52A38E92F0098C35C /* Build configuration list for PBXNativeTarget "YTodoUITests" */;
+			buildPhases = (
+				A439D4912A38E92F0098C35C /* Sources */,
+				A439D4922A38E92F0098C35C /* Frameworks */,
+				A439D4932A38E92F0098C35C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A439D4972A38E92F0098C35C /* PBXTargetDependency */,
+			);
+			name = YTodoUITests;
+			productName = YTodoUITests;
+			productReference = A439D4952A38E92F0098C35C /* YTodoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A439D46D2A38E92D0098C35C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					A439D4742A38E92D0098C35C = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+					A439D48A2A38E92F0098C35C = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = A439D4742A38E92D0098C35C;
+					};
+					A439D4942A38E92F0098C35C = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = A439D4742A38E92D0098C35C;
+					};
+				};
+			};
+			buildConfigurationList = A439D4702A38E92D0098C35C /* Build configuration list for PBXProject "YTodo" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A439D46C2A38E92D0098C35C;
+			productRefGroup = A439D4762A38E92D0098C35C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A439D4742A38E92D0098C35C /* YTodo */,
+				A439D48A2A38E92F0098C35C /* YTodoTests */,
+				A439D4942A38E92F0098C35C /* YTodoUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A439D4732A38E92D0098C35C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A439D4852A38E92E0098C35C /* LaunchScreen.storyboard in Resources */,
+				A439D4822A38E92E0098C35C /* Assets.xcassets in Resources */,
+				A439D4802A38E92D0098C35C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A439D4892A38E92F0098C35C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A439D4932A38E92F0098C35C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A439D4712A38E92D0098C35C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A439D47D2A38E92D0098C35C /* ViewController.swift in Sources */,
+				A439D4792A38E92D0098C35C /* AppDelegate.swift in Sources */,
+				A439D47B2A38E92D0098C35C /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A439D4872A38E92F0098C35C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A439D4902A38E92F0098C35C /* YTodoTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A439D4912A38E92F0098C35C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A439D49C2A38E92F0098C35C /* YTodoUITestsLaunchTests.swift in Sources */,
+				A439D49A2A38E92F0098C35C /* YTodoUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A439D48D2A38E92F0098C35C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A439D4742A38E92D0098C35C /* YTodo */;
+			targetProxy = A439D48C2A38E92F0098C35C /* PBXContainerItemProxy */;
+		};
+		A439D4972A38E92F0098C35C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A439D4742A38E92D0098C35C /* YTodo */;
+			targetProxy = A439D4962A38E92F0098C35C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A439D47E2A38E92D0098C35C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A439D47F2A38E92D0098C35C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A439D4832A38E92E0098C35C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A439D4842A38E92E0098C35C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A439D49D2A38E92F0098C35C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A439D49E2A38E92F0098C35C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A439D4A02A38E92F0098C35C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = UV4BPKP674;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = YTodo/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vsv.YTodo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A439D4A12A38E92F0098C35C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = UV4BPKP674;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = YTodo/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vsv.YTodo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A439D4A32A38E92F0098C35C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = UV4BPKP674;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vsv.YTodoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YTodo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/YTodo";
+			};
+			name = Debug;
+		};
+		A439D4A42A38E92F0098C35C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = UV4BPKP674;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vsv.YTodoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YTodo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/YTodo";
+			};
+			name = Release;
+		};
+		A439D4A62A38E92F0098C35C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = UV4BPKP674;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vsv.YTodoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = YTodo;
+			};
+			name = Debug;
+		};
+		A439D4A72A38E92F0098C35C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = UV4BPKP674;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vsv.YTodoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = YTodo;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A439D4702A38E92D0098C35C /* Build configuration list for PBXProject "YTodo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A439D49D2A38E92F0098C35C /* Debug */,
+				A439D49E2A38E92F0098C35C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A439D49F2A38E92F0098C35C /* Build configuration list for PBXNativeTarget "YTodo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A439D4A02A38E92F0098C35C /* Debug */,
+				A439D4A12A38E92F0098C35C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A439D4A22A38E92F0098C35C /* Build configuration list for PBXNativeTarget "YTodoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A439D4A32A38E92F0098C35C /* Debug */,
+				A439D4A42A38E92F0098C35C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A439D4A52A38E92F0098C35C /* Build configuration list for PBXNativeTarget "YTodoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A439D4A62A38E92F0098C35C /* Debug */,
+				A439D4A72A38E92F0098C35C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A439D46D2A38E92D0098C35C /* Project object */;
+}
