@@ -16,6 +16,7 @@
 		A439D4902A38E92F0098C35C /* YTodoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439D48F2A38E92F0098C35C /* YTodoTests.swift */; };
 		A439D49A2A38E92F0098C35C /* YTodoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439D4992A38E92F0098C35C /* YTodoUITests.swift */; };
 		A439D49C2A38E92F0098C35C /* YTodoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439D49B2A38E92F0098C35C /* YTodoUITestsLaunchTests.swift */; };
+		A439D4A92A38E9520098C35C /* TodoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439D4A82A38E9520098C35C /* TodoItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		A439D4952A38E92F0098C35C /* YTodoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YTodoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A439D4992A38E92F0098C35C /* YTodoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTodoUITests.swift; sourceTree = "<group>"; };
 		A439D49B2A38E92F0098C35C /* YTodoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTodoUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		A439D4A82A38E9520098C35C /* TodoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				A439D4812A38E92E0098C35C /* Assets.xcassets */,
 				A439D4832A38E92E0098C35C /* LaunchScreen.storyboard */,
 				A439D4862A38E92E0098C35C /* Info.plist */,
+				A439D4A82A38E9520098C35C /* TodoItem.swift */,
 			);
 			path = YTodo;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 			files = (
 				A439D47D2A38E92D0098C35C /* ViewController.swift in Sources */,
 				A439D4792A38E92D0098C35C /* AppDelegate.swift in Sources */,
+				A439D4A92A38E9520098C35C /* TodoItem.swift in Sources */,
 				A439D47B2A38E92D0098C35C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
