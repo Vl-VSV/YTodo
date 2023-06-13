@@ -37,3 +37,62 @@ struct TodoItem {
         self.dateOfChange = dateOfChange
     }
 }
+
+extension TodoItem {
+    
+    // MARK: - Deserialization
+    static func parse(json: Any) -> TodoItem? {
+        guard let json = json as? [String: Any] else {
+            return nil
+        }
+        
+        guard let id = json["id"] as? String,
+              let text = json["text"] as? String,
+              let isCompleted = json["isCompleted"] as? Bool,
+              let dateOfCreationDoubleValue = json["dateOfCreation"] as? Double
+        else {
+            return nil
+        }
+        
+        let dateOfCreation = Date(timeIntervalSince1970: dateOfCreationDoubleValue)
+        
+        let priority = (json["priority"] as? String).flatMap(Priority.init(rawValue:)) ?? .normal
+         
+        var deadline: Date? = nil
+        if let deadlineDoubleValue = json["deadline"] as? Double {
+            deadline = Date(timeIntervalSince1970: deadlineDoubleValue)
+        }
+        
+        var dateOfChange: Date? = nil
+        if let dateOfChangeDoubleValue = json["dateOfChange"] as? Double {
+            dateOfChange = Date(timeIntervalSince1970: dateOfChangeDoubleValue)
+        }
+        
+        return TodoItem(id: id, text: text, priority: priority, deadline: deadline, isCompleted: isCompleted, dateOfCreation: dateOfCreation, dateOfChange: dateOfChange)
+    }
+    
+    // MARK: - Serialization
+    var json: Any {
+        var result = [String: Any]()
+        
+        result["id"] = id
+        result["text"] = text
+        result["isCompleted"] = isCompleted
+        result["dateOfCreation"] = Double(dateOfCreation.timeIntervalSince1970)
+        
+        
+        if priority != .normal {
+            result["priority"] = priority.rawValue
+        }
+        
+        if let deadline = deadline {
+            result["deadline"] = Double(deadline.timeIntervalSince1970)
+        }
+        
+        if let dateOfChange = dateOfChange {
+            result["dateOfChange"] = Double(dateOfChange.timeIntervalSince1970)
+        }
+        
+        return result
+    }
+}
