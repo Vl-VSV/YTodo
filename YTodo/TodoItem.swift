@@ -100,6 +100,8 @@ extension TodoItem {
 
 // MARK: - TodoItem CSV extension
 extension TodoItem {
+    
+    // MARK: - Deserialization
     static func parse(csv: Any) -> TodoItem? {
         guard let csv = csv as? String else {
             return nil
@@ -141,10 +143,11 @@ extension TodoItem {
         
     }
     
+    // MARK: - Serialization
     var csv: String {
         var result = ""
         
-        result += "\n" + id + "," + text + "," + priority.rawValue + ","
+        result += id + "," + text + "," + priority.rawValue + ","
         
         if let deadline = deadline {
             result += String(deadline.timeIntervalSince1970) + ","
