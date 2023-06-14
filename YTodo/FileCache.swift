@@ -74,6 +74,10 @@ extension FileCache {
         
         let rows = csvString.components(separatedBy: "\n")
         
+        if rows[0] != "id,text,priority,deadline,isCompleted,dateOfCreation,dateOfChange" {
+            throw FileCacheErrors.upparsableData
+        }
+        
         for rowIndex in 1 ..< rows.count {
             if let todoItem = TodoItem.parse(csv: rows[rowIndex]) {
                 add(todoItem)
@@ -87,7 +91,7 @@ extension FileCache {
         }
         
         let path = dir.appending(path: file)
-        print(path.absoluteString)
+        
         var dataString = "id,text,priority,deadline,isCompleted,dateOfCreation,dateOfChange"
         for item in todoItems {
             dataString += "\n" + item.csv

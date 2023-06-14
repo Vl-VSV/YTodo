@@ -9,19 +9,9 @@ import XCTest
 @testable import YTodo
 
 final class FileCacheTests: XCTestCase {
-    var fileCache: FileCache!
-    
-    override func setUp() {
-        super.setUp()
-        fileCache = FileCache()
-    }
-    
-    override func tearDown() {
-        fileCache = nil
-        super.tearDown()
-    }
     
     func testAddItem() {
+        let fileCache = FileCache()
         
         let item = TodoItem(id: "1", text: "Buy groceries", priority: .normal, isCompleted: false, dateOfCreation: Date())
         
@@ -31,6 +21,7 @@ final class FileCacheTests: XCTestCase {
     }
     
     func testAddDuplicateItem() {
+        let fileCache = FileCache()
         
         let item = TodoItem(id: "1", text: "Buy groceries", priority: .normal, isCompleted: false, dateOfCreation: Date())
         fileCache.add(item)
@@ -40,6 +31,7 @@ final class FileCacheTests: XCTestCase {
     }
     
     func testDeleteItem() {
+        let fileCache = FileCache()
         
         let item = TodoItem(id: "1", text: "Buy groceries", priority: .normal, isCompleted: false, dateOfCreation: Date())
         
@@ -50,6 +42,7 @@ final class FileCacheTests: XCTestCase {
     }
     
     func testSaveToFile() {
+        let fileCache = FileCache()
         
         let item1 = TodoItem(id: "1", text: "Buy groceries", priority: .normal, isCompleted: false, dateOfCreation: Date())
         let item2 = TodoItem(id: "2", text: "Do laundry", priority: .high, isCompleted: true, dateOfCreation: Date())
@@ -68,6 +61,7 @@ final class FileCacheTests: XCTestCase {
     }
     
     func testLoadFromFile() {
+        let fileCache = FileCache()
         
         let filePath = "testFile.json"
         let item1 = TodoItem(id: "1", text: "Buy groceries", priority: .normal, isCompleted: false, dateOfCreation: Date())
@@ -93,6 +87,7 @@ final class FileCacheTests: XCTestCase {
     }
     
     func testLoadFromNonExistentFile() {
+        let fileCache = FileCache()
         
         let nonExistentFilePath = "NonExistentFile.json"
         
@@ -104,6 +99,7 @@ final class FileCacheTests: XCTestCase {
     }
     
     func testLoadFromInvalidFile() {
+        let fileCache = FileCache()
         
         let invalidFilePath = "InvalidFile.json"
         let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -120,6 +116,51 @@ final class FileCacheTests: XCTestCase {
         }
         print(fileCache.todoItems)
         XCTAssertEqual(fileCache.todoItems.count, 0)
+    }
+    
+    func testSaveToCSVFile() {
+        let fileCache = FileCache()
+        
+        let item1 = TodoItem(id: "1", text: "Buy groceries", priority: .normal, isCompleted: false, dateOfCreation: Date())
+        let item2 = TodoItem(id: "2", text: "Do laundry", priority: .high, isCompleted: true, dateOfCreation: Date())
+        fileCache.add(item1)
+        fileCache.add(item2)
+        
+        let filePath = "testFile.csv"
+        
+        do {
+            try fileCache.save(to: filePath)
+        } catch {
+            XCTFail("Saving to file failed with error: \(error)")
+        }
+        
+        XCTAssertNotNil(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.pathComponents.contains(filePath))
+    }
+    
+    func testLoadFromCSVFile() {
+        let fileCache = FileCache()
+        
+        let filePath = "testFile.csv"
+        let item1 = TodoItem(id: "1", text: "Buy groceries", priority: .normal, isCompleted: false, dateOfCreation: Date())
+        let item2 = TodoItem(id: "2", text: "Do laundry", priority: .high, isCompleted: true, dateOfCreation: Date())
+        fileCache.add(item1)
+        fileCache.add(item2)
+        
+        do {
+            try fileCache.save(to: filePath)
+        } catch {
+            XCTFail("Saving to file failed with error: \(error)")
+        }
+        
+        do {
+            try fileCache.load(from: filePath)
+        } catch {
+            XCTFail("Loading from file failed with error: \(error)")
+        }
+        
+        XCTAssertEqual(fileCache.todoItems.count, 2)
+        XCTAssertTrue(fileCache.todoItems.contains(where: {$0.id == item1.id}))
+        XCTAssertTrue(fileCache.todoItems.contains(where: {$0.id == item2.id}))
     }
 
 }

@@ -97,7 +97,13 @@ final class TodoItemTests: XCTestCase {
         XCTAssertEqual(todoItem?.priority, priority)
         XCTAssertNil(todoItem?.deadline)
         XCTAssertEqual(todoItem?.isCompleted, isCompleted)
-        XCTAssertEqual(Double((todoItem?.dateOfCreation.timeIntervalSince1970)!), Double(dateOfCreation.timeIntervalSince1970), accuracy: 0.001)
+        
+        if let itemDate = todoItem?.dateOfCreation {
+            XCTAssertEqual(itemDate.timeIntervalSince1970, dateOfCreation.timeIntervalSince1970)
+        } else {
+            XCTFail("Failed to unwrap dateOfCreation")
+        }
+
         XCTAssertNil(todoItem?.dateOfChange)
     }
     
@@ -117,7 +123,7 @@ final class TodoItemTests: XCTestCase {
         
         let csv = todoItem.csv
         
-        XCTAssertEqual(csv, "12345,Buy groceries,high,\(dateString),false,\(dateString),\(dateString)")
+        XCTAssertEqual(csv, "\(id),\(text),\(priority.rawValue),\(dateString),\(isCompleted),\(dateString),\(dateString)")
     }
     
     func testTodoItemCSVDeserialization() {
@@ -129,9 +135,7 @@ final class TodoItemTests: XCTestCase {
         
         let dateString = String(Double(dateOfCreation.timeIntervalSince1970))
         
-        let todo = TodoItem(id: id, text: text, priority: priority, isCompleted: isCompleted, dateOfCreation: dateOfCreation)
-        
-        let csvString = "12345,Buy groceries,high,,false,\(dateString),"
+        let csvString = "\(id),\(text),\(priority.rawValue),,\(isCompleted),\(dateString),"
         
         let todoItem = TodoItem.parse(csv: csvString)
         
@@ -141,7 +145,13 @@ final class TodoItemTests: XCTestCase {
         XCTAssertEqual(todoItem?.priority, priority)
         XCTAssertNil(todoItem?.deadline)
         XCTAssertEqual(todoItem?.isCompleted, isCompleted)
-        XCTAssertEqual(todoItem?.dateOfCreation, dateOfCreation)
+        
+        if let itemDate = todoItem?.dateOfCreation {
+            XCTAssertEqual(itemDate.timeIntervalSince1970, dateOfCreation.timeIntervalSince1970)
+        } else {
+            XCTFail("Failed to unwrap dateOfCreation")
+        }
+        
         XCTAssertNil(todoItem?.dateOfChange)
     }
 }

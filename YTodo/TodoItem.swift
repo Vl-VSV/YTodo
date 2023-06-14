@@ -147,7 +147,7 @@ extension TodoItem {
     var csv: String {
         var result = ""
         
-        result += id + "," + text + "," + priority.rawValue + ","
+        result += id + "," + text + "," + (priority == .normal ? "" : priority.rawValue) + ","
         
         if let deadline = deadline {
             result += String(deadline.timeIntervalSince1970) + ","
