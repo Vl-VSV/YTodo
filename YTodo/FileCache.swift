@@ -37,7 +37,7 @@ final class FileCache {
         try data.write(to: path)
     }
     
-    func load (from file: String) throws {
+    func load(from file: String) throws {
         guard let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             throw FileCacheErrors.noSuchFileOrDirectory
         }
@@ -78,6 +78,7 @@ extension FileCache {
             throw FileCacheErrors.upparsableData
         }
         
+        todoItems = []
         for rowIndex in 1 ..< rows.count {
             if let todoItem = TodoItem.parse(csv: rows[rowIndex]) {
                 add(todoItem)

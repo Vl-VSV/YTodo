@@ -107,6 +107,23 @@ final class TodoItemTests: XCTestCase {
         XCTAssertNil(todoItem?.dateOfChange)
     }
     
+    func testTodoItemInccorectJSONDeserialization() {
+    
+        let text = "Buy groceries"
+        let priority = Priority.high
+        let isCompleted = false
+        let dateOfCreation = Date()
+        
+        let json: [String: Any] = [
+            "text": text,
+            "priority": priority.rawValue,
+            "isCompleted": isCompleted,
+            "dateOfCreation": Double(dateOfCreation.timeIntervalSince1970)
+        ]
+        
+        XCTAssertNil(TodoItem.parse(json: json))
+    }
+    
     func testTodoItemCSVSerialization() {
         
         let id = "12345"
@@ -135,9 +152,9 @@ final class TodoItemTests: XCTestCase {
         
         let dateString = String(Double(dateOfCreation.timeIntervalSince1970))
         
-        let csvString = "\(id),\(text),\(priority.rawValue),,\(isCompleted),\(dateString),"
+        let csv = "\(id),\(text),\(priority.rawValue),,\(isCompleted),\(dateString),"
         
-        let todoItem = TodoItem.parse(csv: csvString)
+        let todoItem = TodoItem.parse(csv: csv)
         
         XCTAssertNotNil(todoItem)
         XCTAssertEqual(todoItem?.id, id)
@@ -153,6 +170,17 @@ final class TodoItemTests: XCTestCase {
         }
         
         XCTAssertNil(todoItem?.dateOfChange)
+    }
+    
+    func testTodoItemIncorrectCSVDeserialization() {
+        let id = "id"
+        let text = "Buy groceries"
+        let priority = Priority.high
+        let isCompleted = false
+        
+        let csv = "\(id),\(text),\(priority.rawValue),,\(isCompleted),,"
+        
+        XCTAssertNil(TodoItem.parse(csv: csv))
     }
 }
 
