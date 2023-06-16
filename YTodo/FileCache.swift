@@ -27,7 +27,7 @@ final class FileCache {
         todoItems.removeAll(where: { $0.id == id})
     }
     
-    func save(to file: String) throws {
+    func saveJSON(to file: String) throws {
         guard let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             throw FileCacheErrors.noSuchFileOrDirectory
         }
@@ -37,7 +37,7 @@ final class FileCache {
         try data.write(to: path)
     }
     
-    func load(from file: String) throws {
+    func loadJSON(from file: String) throws {
         guard let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             throw FileCacheErrors.noSuchFileOrDirectory
         }
@@ -74,7 +74,7 @@ extension FileCache {
         
         let rows = csvString.components(separatedBy: "\n")
         
-        if rows[0] != "id,text,priority,deadline,isCompleted,dateOfCreation,dateOfChange" {
+        if rows[0] != "id;text;priority;deadline;isCompleted;dateOfCreation;dateOfChange" {
             throw FileCacheErrors.upparsableData
         }
         
@@ -92,8 +92,8 @@ extension FileCache {
         }
         
         let path = dir.appending(path: file)
-        
-        var dataString = "id,text,priority,deadline,isCompleted,dateOfCreation,dateOfChange"
+        print(path)
+        var dataString = "id;text;priority;deadline;isCompleted;dateOfCreation;dateOfChange"
         for item in todoItems {
             dataString += "\n" + item.csv
         }

@@ -52,7 +52,7 @@ final class FileCacheTests: XCTestCase {
         let filePath = "testFile.json"
         
         do {
-            try fileCache.save(to: filePath)
+            try fileCache.saveJSON(to: filePath)
         } catch {
             XCTFail("Saving to file failed with error: \(error)")
         }
@@ -70,13 +70,13 @@ final class FileCacheTests: XCTestCase {
         fileCache.add(item2)
         
         do {
-            try fileCache.save(to: filePath)
+            try fileCache.saveJSON(to: filePath)
         } catch {
             XCTFail("Saving to file failed with error: \(error)")
         }
         
         do {
-            try fileCache.load(from: filePath)
+            try fileCache.loadJSON(from: filePath)
         } catch {
             XCTFail("Loading from file failed with error: \(error)")
         }
@@ -91,7 +91,7 @@ final class FileCacheTests: XCTestCase {
         
         let nonExistentFilePath = "NonExistentFile.json"
         
-        XCTAssertThrowsError(try fileCache.load(from: nonExistentFilePath), "Expected error to be thrown") { error in
+        XCTAssertThrowsError(try fileCache.loadJSON(from: nonExistentFilePath), "Expected error to be thrown") { error in
             XCTAssertEqual(error as? FileCacheErrors, FileCacheErrors.noSuchFileOrDirectory)
         }
         
@@ -111,7 +111,7 @@ final class FileCacheTests: XCTestCase {
             print("error")
         }
         
-        XCTAssertThrowsError(try fileCache.load(from: invalidFilePath), "Expected error to be thrown") { error in
+        XCTAssertThrowsError(try fileCache.loadJSON(from: invalidFilePath), "Expected error to be thrown") { error in
             XCTAssertEqual(error as? FileCacheErrors, FileCacheErrors.upparsableData)
         }
         print(fileCache.todoItems)
@@ -129,7 +129,7 @@ final class FileCacheTests: XCTestCase {
         let filePath = "testFile.csv"
         
         do {
-            try fileCache.save(to: filePath)
+            try fileCache.saveJSON(to: filePath)
         } catch {
             XCTFail("Saving to file failed with error: \(error)")
         }
@@ -147,13 +147,13 @@ final class FileCacheTests: XCTestCase {
         fileCache.add(item2)
         
         do {
-            try fileCache.save(to: filePath)
+            try fileCache.saveJSON(to: filePath)
         } catch {
             XCTFail("Saving to file failed with error: \(error)")
         }
         
         do {
-            try fileCache.load(from: filePath)
+            try fileCache.loadJSON(from: filePath)
         } catch {
             XCTFail("Loading from file failed with error: \(error)")
         }

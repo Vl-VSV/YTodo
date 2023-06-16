@@ -140,19 +140,19 @@ final class TodoItemTests: XCTestCase {
         
         let csv = todoItem.csv
         
-        XCTAssertEqual(csv, "\(id),\(text),\(priority.rawValue),\(dateString),\(isCompleted),\(dateString),\(dateString)")
+        XCTAssertEqual(csv, "\(id);\(text);\(priority.rawValue);\(dateString);\(isCompleted);\(dateString);\(dateString)")
     }
     
     func testTodoItemCSVDeserialization() {
         let id = "12345"
-        let text = "Buy groceries"
+        let text = "Buy groceries, equipment"
         let priority = Priority.high
         let isCompleted = false
         let dateOfCreation = Date()
         
         let dateString = String(Double(dateOfCreation.timeIntervalSince1970))
         
-        let csv = "\(id),\(text),\(priority.rawValue),,\(isCompleted),\(dateString),"
+        let csv = "\(id);\(text);\(priority.rawValue);;\(isCompleted);\(dateString);"
         
         let todoItem = TodoItem.parse(csv: csv)
         
@@ -178,7 +178,7 @@ final class TodoItemTests: XCTestCase {
         let priority = Priority.high
         let isCompleted = false
         
-        let csv = "\(id),\(text),\(priority.rawValue),,\(isCompleted),,"
+        let csv = "\(id);\(text);\(priority.rawValue);;\(isCompleted);;"
         
         XCTAssertNil(TodoItem.parse(csv: csv))
     }

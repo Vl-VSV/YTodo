@@ -107,7 +107,7 @@ extension TodoItem {
             return nil
         }
         
-        let fields = csv.components(separatedBy: ",")
+        let fields = csv.components(separatedBy: ";")
         
         guard fields.count == 7  else {
             return nil
@@ -147,14 +147,14 @@ extension TodoItem {
     var csv: String {
         var result = ""
         
-        result += id + "," + text + "," + (priority == .normal ? "" : priority.rawValue) + ","
+        result += id + ";" + text + ";" + (priority == .normal ? "" : priority.rawValue) + ";"
         
         if let deadline = deadline {
-            result += String(deadline.timeIntervalSince1970) + ","
+            result += String(deadline.timeIntervalSince1970) + ";"
         } else {
-            result += ","
+            result += ";"
         }
-        result += String(isCompleted) + "," + String(dateOfCreation.timeIntervalSince1970) + ","
+        result += String(isCompleted) + ";" + String(dateOfCreation.timeIntervalSince1970) + ";"
         if let dateOfChange = dateOfChange {
             result += String(dateOfChange.timeIntervalSince1970)
         }
