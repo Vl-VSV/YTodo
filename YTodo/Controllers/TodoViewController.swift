@@ -14,6 +14,10 @@ class TodoViewController: UIViewController {
     private var scrollVeiwBottomConstraint: NSLayoutConstraint?
     private var fileCache = FileCache()
     
+    private var text: String?
+    private var priority: Priority = .normal
+    private var deadline: Date?
+    
     // MARK: - UIConstants
     private enum UIConstants {
         static let cornerRadius: CGFloat = 16
@@ -106,22 +110,23 @@ class TodoViewController: UIViewController {
         return stackView
     }()
     
-    private let importanceLabel: UILabel = {
+    private let priorityLabel: UILabel = {
         let label = UILabel()
         label.text = "Важность"
         label.font = .systemFont(ofSize: 17)
         return label
     }()
     
-    private let importancePickerView: UISegmentedControl = {
+    private lazy var priorityPickerView: UISegmentedControl = {
         let segmentedControl = UISegmentedControl(items: ["", "нет", ""])
         segmentedControl.selectedSegmentIndex = 1
         segmentedControl.setImage(ImageAssets.priorityLow, forSegmentAt: 0)
         segmentedControl.setImage(ImageAssets.priorityHigh, forSegmentAt: 2)
+        segmentedControl.addTarget(self, action: #selector(priorityValueChanged), for: .valueChanged)
         return segmentedControl
     }()
     
-    private let importanceStackView: UIStackView = {
+    private let priorityStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fill
@@ -244,8 +249,8 @@ class TodoViewController: UIViewController {
         addNewTodoStackView.addArrangedSubview(settingsStackView)
         addNewTodoStackView.addArrangedSubview(deleteButton)
         
-        importanceStackView.addArrangedSubview(importanceLabel)
-        importanceStackView.addArrangedSubview(importancePickerView)
+        priorityStackView.addArrangedSubview(priorityLabel)
+        priorityStackView.addArrangedSubview(priorityPickerView)
         
         deadlineLabelsStackView.addArrangedSubview(deadlineLabel)
         deadlineLabelsStackView.addArrangedSubview(deadlineDateLabel)
@@ -253,22 +258,19 @@ class TodoViewController: UIViewController {
         deadlineStackView.addArrangedSubview(deadlineLabelsStackView)
         deadlineStackView.addArrangedSubview(deadlineSwitchView)
         
-        settingsStackView.addArrangedSubview(importanceStackView)
+        settingsStackView.addArrangedSubview(priorityStackView)
         settingsStackView.addArrangedSubview(dividerView)
         settingsStackView.addArrangedSubview(deadlineStackView)
         settingsStackView.addArrangedSubview(secondDividerView)
         settingsStackView.addArrangedSubview(datePicker)
-        
-        secondDividerView.isHidden = true
-        datePicker.isHidden = true
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         addNewTodoStackView.translatesAutoresizingMaskIntoConstraints = false
         textView.translatesAutoresizingMaskIntoConstraints = false
         settingsStackView.translatesAutoresizingMaskIntoConstraints = false
         deleteButton.translatesAutoresizingMaskIntoConstraints = false
-        importanceStackView.translatesAutoresizingMaskIntoConstraints = false
-        importancePickerView.translatesAutoresizingMaskIntoConstraints = false
+        priorityStackView.translatesAutoresizingMaskIntoConstraints = false
+        priorityPickerView.translatesAutoresizingMaskIntoConstraints = false
         datePicker.translatesAutoresizingMaskIntoConstraints = false
         
         let bottomConstraint = scrollView.bottomAnchor.constraint(
@@ -299,8 +301,8 @@ class TodoViewController: UIViewController {
             
             deleteButton.heightAnchor.constraint(equalToConstant: UIConstants.deleteButtonHeight),
             
-            importancePickerView.widthAnchor.constraint(equalToConstant: UIConstants.segmentedControlWidth),
-            importancePickerView.heightAnchor.constraint(equalToConstant: UIConstants.segmentedControlHeight),
+            priorityPickerView.widthAnchor.constraint(equalToConstant: UIConstants.segmentedControlWidth),
+            priorityPickerView.heightAnchor.constraint(equalToConstant: UIConstants.segmentedControlHeight),
             
             datePicker.widthAnchor.constraint(equalTo: settingsStackView.widthAnchor)
         ])
@@ -332,6 +334,16 @@ class TodoViewController: UIViewController {
     // MARK: - Handlers
     @objc private func saveButtonTapped() {
         print("Save Tapped")
+        
+        guard let text = text else { return }
+        let todo = TodoItem(text: text, priority: priority, deadline: deadline, isCompleted: false, dateOfCreation: .now)
+        fileCache.add(todo)
+        do {
+            try fileCache.saveCSV(to: "SavedItems.csv")
+        } catch {
+            print(error)
+        }
+        
     }
     
     @objc private func cancelButtonTapped() {
@@ -343,17 +355,18 @@ class TodoViewController: UIViewController {
     }
     
     @objc private func UpdateDate() {
-        print("Switch Tapped")
         
         if deadlineSwitchView.isOn == true {
             UIView.animate(withDuration: 0.5) {
                 self.deadlineDateLabel.isHidden = !self.deadlineSwitchView.isOn
+                self.deadline = Date(timeIntervalSinceNow: 60*60*24)
             }
         } else {
             UIView.animate(withDuration: 0.5) {
                 self.deadlineDateLabel.isHidden = !self.deadlineSwitchView.isOn
                 self.datePicker.isHidden = !self.deadlineSwitchView.isOn
                 self.secondDividerView.isHidden = !self.deadlineSwitchView.isOn
+                self.deadline = nil
             }
         }
         
@@ -368,6 +381,7 @@ class TodoViewController: UIViewController {
     
     @objc private func deadlineDateChanged(sender: UIDatePicker) {
         deadlineDateLabel.text = "\(sender.date.formatted(.dateTime.day().month().year()))"
+        deadline = sender.date
         UIView.animate(withDuration: 0.5) {
             self.datePicker.isHidden = true
             self.secondDividerView.isHidden = true
@@ -395,6 +409,21 @@ class TodoViewController: UIViewController {
         }
     }
     
+    @objc private func priorityValueChanged() {
+        print("Priority Value Changed")
+        
+        switch priorityPickerView.selectedSegmentIndex {
+        case 0:
+            priority = .low
+        case 1:
+            priority = .normal
+        case 2:
+            priority = .high
+        default:
+            priority = .normal
+        }
+    }
+    
 }
 
 // MARK: - UITextViewDelegate
@@ -417,5 +446,6 @@ extension TodoViewController: UITextViewDelegate {
             deadlineSwitchView.setOn(false, animated: true)
             UpdateDate()
         }
+        text = textView.text
     }
 }
