@@ -10,11 +10,15 @@ import UIKit
 // MARK: - Todo View Controller
 class TodoViewController: UIViewController {
     
+    // MARK: - Properties
     private var scrollVeiwBottomConstraint: NSLayoutConstraint?
+    private var fileCache = FileCache()
     
     // MARK: - UIConstants
     private enum UIConstants {
         static let cornerRadius: CGFloat = 16
+        
+        static let scrollViewBottomPadding: CGFloat = 16
         
         static let stackViewSpacing: CGFloat = 16
         
@@ -59,30 +63,18 @@ class TodoViewController: UIViewController {
         
         setupNavigationBar()
         setupSubviews()
+        subscribeToKeyboard()
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         tapGesture.cancelsTouchesInView = false
         scrollView.addGestureRecognizer(tapGesture)
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(handleKeyboard(_:)),
-            name: UIResponder.keyboardWillShowNotification,
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(handleKeyboard(_:)),
-            name: UIResponder.keyboardWillHideNotification,
-            object: nil
-        )
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self)
+        unsubdcribeToKeyboard()
     }
     
-    // MARK: - Properties
+    // MARK: - View Properties
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
@@ -192,7 +184,6 @@ class TodoViewController: UIViewController {
         stackView.axis = .vertical
         stackView.spacing = 0
         stackView.distribution = .fill
-//        stackView.alignment = .center
         stackView.backgroundColor = ColorPalette.backSecondary
         stackView.layer.cornerRadius = UIConstants.cornerRadius
         return stackView
@@ -280,13 +271,15 @@ class TodoViewController: UIViewController {
         importancePickerView.translatesAutoresizingMaskIntoConstraints = false
         datePicker.translatesAutoresizingMaskIntoConstraints = false
         
-        let bottomConstraint = scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16)
+        let bottomConstraint = scrollView.bottomAnchor.constraint(
+            equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+            constant: -UIConstants.scrollViewBottomPadding
+        )
         
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-//            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
             bottomConstraint
         ])
         
@@ -317,6 +310,25 @@ class TodoViewController: UIViewController {
         UpdateDate()
     }
     
+    private func subscribeToKeyboard() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleKeyboard(_:)),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleKeyboard(_:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+    }
+    
+    private func unsubdcribeToKeyboard() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     // MARK: - Handlers
     @objc private func saveButtonTapped() {
         print("Save Tapped")
@@ -334,11 +346,11 @@ class TodoViewController: UIViewController {
         print("Switch Tapped")
         
         if deadlineSwitchView.isOn == true {
-            UIView.animate(withDuration: 1) {
+            UIView.animate(withDuration: 0.5) {
                 self.deadlineDateLabel.isHidden = !self.deadlineSwitchView.isOn
             }
         } else {
-            UIView.animate(withDuration: 1) {
+            UIView.animate(withDuration: 0.5) {
                 self.deadlineDateLabel.isHidden = !self.deadlineSwitchView.isOn
                 self.datePicker.isHidden = !self.deadlineSwitchView.isOn
                 self.secondDividerView.isHidden = !self.deadlineSwitchView.isOn
@@ -348,7 +360,7 @@ class TodoViewController: UIViewController {
     }
     
     @objc private func deadlineDateLabelTapped() {
-        UIView.animate(withDuration: 1) {
+        UIView.animate(withDuration: 0.5) {
             self.datePicker.isHidden = false
             self.secondDividerView.isHidden = false
         }
@@ -356,7 +368,7 @@ class TodoViewController: UIViewController {
     
     @objc private func deadlineDateChanged(sender: UIDatePicker) {
         deadlineDateLabel.text = "\(sender.date.formatted(.dateTime.day().month().year()))"
-        UIView.animate(withDuration: 1) {
+        UIView.animate(withDuration: 0.5) {
             self.datePicker.isHidden = true
             self.secondDividerView.isHidden = true
         }
@@ -373,9 +385,9 @@ class TodoViewController: UIViewController {
         let height = view.convert(keyboardValue.cgRectValue, to: view.window).height
         let keyboardConstant: CGFloat
         if notification.name == UIResponder.keyboardWillShowNotification {
-            keyboardConstant = height + 16
+            keyboardConstant = height + UIConstants.scrollViewBottomPadding
         } else {
-            keyboardConstant = 16
+            keyboardConstant = UIConstants.scrollViewBottomPadding
         }
         scrollVeiwBottomConstraint?.constant = -keyboardConstant
         UIView.animate(withDuration: 0.5) {
@@ -388,14 +400,18 @@ class TodoViewController: UIViewController {
 // MARK: - UITextViewDelegate
 extension TodoViewController: UITextViewDelegate {
     
-    func textViewDidChange(_ textView: UITextView) {
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        if textView.text == "Что надо сделать?" {
+            textView.text = nil
+        }
         textView.textColor = ColorPalette.labelPrimary
         deleteButton.isEnabled = true
         deadlineSwitchView.isEnabled = true
+        return true
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text.isEmpty || textView.text == "Что надо сделать?"{
+        if textView.text.isEmpty {
             textView.text = "Что надо сделать?"
             textView.textColor = ColorPalette.tertiary
             deadlineSwitchView.setOn(false, animated: true)
