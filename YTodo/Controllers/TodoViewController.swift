@@ -52,6 +52,8 @@ class TodoViewController: UIViewController {
         static let segmentedControlWidth: CGFloat = 150
         static let segmentedControlHeight: CGFloat = 36
         
+        static let dividerHeight: CGFloat = 1
+        
         static let deleteButtonHeight: CGFloat = 56
     }
     
@@ -72,6 +74,7 @@ class TodoViewController: UIViewController {
         scrollView.addGestureRecognizer(tapGesture)
     }
     
+    // MARK: - Deinit
     deinit {
         unsubdcribeToKeyboard()
     }
@@ -145,7 +148,7 @@ class TodoViewController: UIViewController {
     
     private lazy var deadlineDateLabel: UILabel = {
         let label = UILabel()
-        label.text = "\(Date().formatted(.dateTime.day().month().year(.defaultDigits)))"
+        label.text = "\(Date(timeIntervalSinceNow: 60*60*24).formatted(.dateTime.day().month().year(.defaultDigits)))"
         label.font = .systemFont(ofSize: 13, weight: .semibold)
         label.textColor = ColorPalette.blue
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(deadlineDateLabelTapped))
@@ -195,14 +198,16 @@ class TodoViewController: UIViewController {
     private let dividerView: UIView = {
         let view = UIView()
         view.backgroundColor = ColorPalette.separator
-        view.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+        view.heightAnchor.constraint(equalToConstant: UIConstants.dividerHeight).isActive = true
+        view.layer.cornerRadius = UIConstants.cornerRadius
         return view
     }()
     
     private lazy var secondDividerView: UIView = {
         let view = UIView()
         view.backgroundColor = ColorPalette.separator
-        view.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+        view.heightAnchor.constraint(equalToConstant: UIConstants.dividerHeight).isActive = true
+        view.layer.cornerRadius = 16
         return view
     }()
     
@@ -377,14 +382,14 @@ class TodoViewController: UIViewController {
         
         if deadlineSwitchView.isOn == true {
             UIView.animate(withDuration: 0.5) {
-                self.deadlineDateLabel.isHidden = !self.deadlineSwitchView.isOn
+                self.deadlineDateLabel.isHidden = false
                 self.todo.deadline = Date(timeIntervalSinceNow: 60*60*24)
             }
         } else {
             UIView.animate(withDuration: 0.5) {
-                self.deadlineDateLabel.isHidden = !self.deadlineSwitchView.isOn
-                self.datePicker.isHidden = !self.deadlineSwitchView.isOn
-                self.secondDividerView.isHidden = !self.deadlineSwitchView.isOn
+                self.deadlineDateLabel.isHidden = true
+                self.datePicker.isHidden = true
+                self.secondDividerView.isHidden = true
                 self.todo.deadline = nil
             }
         }
