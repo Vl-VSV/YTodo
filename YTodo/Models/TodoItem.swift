@@ -18,13 +18,13 @@ enum Priority: String {
 struct TodoItem {
     
     // MARK: - Properties
-    let id: String
-    let text: String
-    let priority: Priority
-    let deadline: Date?
-    let isCompleted: Bool
-    let dateOfCreation: Date
-    let dateOfChange: Date?
+    var id: String
+    var text: String
+    var priority: Priority
+    var deadline: Date?
+    var isCompleted: Bool
+    var dateOfCreation: Date
+    var dateOfChange: Date?
     
     // MARK: - Init
     init(id: String = UUID().uuidString, text: String, priority: Priority, deadline: Date? = nil, isCompleted: Bool, dateOfCreation: Date, dateOfChange: Date? = nil) {

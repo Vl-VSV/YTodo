@@ -14,9 +14,7 @@ class TodoViewController: UIViewController {
     private var scrollVeiwBottomConstraint: NSLayoutConstraint?
     private var fileCache = FileCache()
     
-    private var text: String?
-    private var priority: Priority = .normal
-    private var deadline: Date?
+    private var todo: TodoItem = TodoItem(text: "", priority: .normal, isCompleted: false, dateOfCreation: .now)
     
     // MARK: - UIConstants
     private enum UIConstants {
@@ -335,14 +333,28 @@ class TodoViewController: UIViewController {
     @objc private func saveButtonTapped() {
         print("Save Tapped")
         
-        guard let text = text else { return }
-        let todo = TodoItem(text: text, priority: priority, deadline: deadline, isCompleted: false, dateOfCreation: .now)
+        let alert = UIAlertController(title: "", message: "Файл успешно сохранен", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ок", style: .default)
+        alert.addAction(action)
+
+        
+        todo.text = textView.text
+        guard todo.text != "" && todo.text != "Что надо сделать?" else {
+            alert.title = "Ошибка"
+            alert.message = "Некоректное описание задачи"
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        
         fileCache.add(todo)
         do {
             try fileCache.saveCSV(to: "SavedItems.csv")
         } catch {
-            print(error)
+            alert.title = "Ошибка"
+            alert.message = error.localizedDescription
         }
+        
+        present(alert, animated: true, completion: nil)
         
     }
     
@@ -352,6 +364,13 @@ class TodoViewController: UIViewController {
     
     @objc private func deleteButtonTapped() {
         print("Delete Tapped")
+        
+        fileCache.delete(withId: todo.id)
+        do {
+            try fileCache.saveCSV(to: "SavedItems.csv")
+        } catch {
+            print(error)
+        }
     }
     
     @objc private func UpdateDate() {
@@ -359,14 +378,14 @@ class TodoViewController: UIViewController {
         if deadlineSwitchView.isOn == true {
             UIView.animate(withDuration: 0.5) {
                 self.deadlineDateLabel.isHidden = !self.deadlineSwitchView.isOn
-                self.deadline = Date(timeIntervalSinceNow: 60*60*24)
+                self.todo.deadline = Date(timeIntervalSinceNow: 60*60*24)
             }
         } else {
             UIView.animate(withDuration: 0.5) {
                 self.deadlineDateLabel.isHidden = !self.deadlineSwitchView.isOn
                 self.datePicker.isHidden = !self.deadlineSwitchView.isOn
                 self.secondDividerView.isHidden = !self.deadlineSwitchView.isOn
-                self.deadline = nil
+                self.todo.deadline = nil
             }
         }
         
@@ -381,7 +400,7 @@ class TodoViewController: UIViewController {
     
     @objc private func deadlineDateChanged(sender: UIDatePicker) {
         deadlineDateLabel.text = "\(sender.date.formatted(.dateTime.day().month().year()))"
-        deadline = sender.date
+        todo.deadline = sender.date
         UIView.animate(withDuration: 0.5) {
             self.datePicker.isHidden = true
             self.secondDividerView.isHidden = true
@@ -414,13 +433,13 @@ class TodoViewController: UIViewController {
         
         switch priorityPickerView.selectedSegmentIndex {
         case 0:
-            priority = .low
+            todo.priority = .low
         case 1:
-            priority = .normal
+            todo.priority = .normal
         case 2:
-            priority = .high
+            todo.priority = .high
         default:
-            priority = .normal
+            todo.priority = .normal
         }
     }
     
@@ -446,6 +465,6 @@ extension TodoViewController: UITextViewDelegate {
             deadlineSwitchView.setOn(false, animated: true)
             UpdateDate()
         }
-        text = textView.text
+        todo.text = textView.text
     }
 }
