@@ -20,6 +20,9 @@ final class FileCache {
     func add(_ item: TodoItem) {
         if !todoItems.contains(where: { $0.id == item.id }) {
             todoItems.append(item)
+        } else {
+            delete(withId: item.id)
+            add(item)
         }
     }
     
