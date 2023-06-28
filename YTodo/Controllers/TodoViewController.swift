@@ -368,6 +368,7 @@ class TodoViewController: UIViewController {
                 deadlineDateLabel.text = "\(deadline.formatted(.dateTime.day().month().year()))"
             }
             deadlineSwitchView.isEnabled = true
+            deleteButton.isEnabled = true
         }
     }
     
@@ -390,12 +391,14 @@ class TodoViewController: UIViewController {
         } else {
             fileCache.add(todo)
         }
-        do {
-            try fileCache.saveCSV(to: "SavedItems.csv")
-            delegate?.updateData()
-        } catch {
-            alert.message = error.localizedDescription
-            present(alert, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            do {
+                try self.fileCache.saveCSV(to: "SavedItems.csv")
+                self.delegate?.updateData()
+            } catch {
+                alert.message = error.localizedDescription
+                self.present(alert, animated: true, completion: nil)
+            }
         }
         dismiss(animated: true)
     }
@@ -405,14 +408,17 @@ class TodoViewController: UIViewController {
     }
     
     @objc private func deleteButtonTapped() {
-        print("Delete Tapped")
-        
+        print("delete")
         fileCache.delete(withId: todo.id)
-        do {
-            try fileCache.saveCSV(to: "SavedItems.csv")
-        } catch {
-            print(error)
+        DispatchQueue.main.async {
+            do {
+                try self.fileCache.saveCSV(to: "SavedItems.csv")
+            } catch {
+                print(error)
+            }
         }
+        delegate?.updateData()
+        dismiss(animated: true)
     }
     
     @objc private func UpdateDate() {

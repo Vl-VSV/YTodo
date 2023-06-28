@@ -17,9 +17,6 @@ class TodoListViewController: UIViewController {
     private var hideCompletedItems = false
     private var fileCache: FileCache = FileCache()
     
-    // MARK: - Data
-    private var todoItems: [TodoItem] = []
-    
     // MARK: - Properties
     private let tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .insetGrouped)
@@ -50,13 +47,7 @@ class TodoListViewController: UIViewController {
         title = "Мои Дела"
         setupNavigationBar()
         setupSubviews()
-        
-        do {
-            try fileCache.loadCSV(from: "SavedItems.csv")
-        } catch {
-            
-        }
-        todoItems = fileCache.todoItems
+        loadDate()
         
         view.backgroundColor = ColorPalette.backPrimary
         
@@ -92,6 +83,28 @@ class TodoListViewController: UIViewController {
         ])
     }
     
+    // MARK: - Functions
+    private func loadDate() {
+        DispatchQueue.main.async {
+            do{
+                try self.fileCache.loadCSV(from: "SavedItems.csv")
+            } catch {
+                print(error)
+            }
+            self.tableView.reloadData()
+        }
+    }
+    
+    private func saveData() {
+        DispatchQueue.main.async {
+            do{
+                try self.fileCache.saveCSV(to: "SavedItems.csv")
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
     // MARK: - Handlers
     @objc private func addButtonTapped() {
         let todoVC = TodoViewController(fileCache: fileCache)
@@ -107,16 +120,19 @@ class TodoListViewController: UIViewController {
     }
     
     @objc private func changeCompletion(at indexPath: IndexPath) {
-        let selectedTodo = hideCompletedItems ? todoItems.filter { !$0.isCompleted }[indexPath.row] : todoItems[indexPath.row]
-        let index = todoItems.firstIndex(where: {$0.id == selectedTodo.id})
-        if let index = index {
-            todoItems[index].isCompleted.toggle()
-        }
+        var selectedTodo = hideCompletedItems ? fileCache.todoItems.filter { !$0.isCompleted }[indexPath.row] : fileCache.todoItems[indexPath.row]
+        selectedTodo.isCompleted.toggle()
+        fileCache.update(at: selectedTodo.id, to: selectedTodo)
         tableView.reloadData()
+        do {
+            try fileCache.saveCSV(to: "SavedItems.csv")
+        } catch {
+            print(error)
+        }
     }
     
     @objc private func goToDetailView(at indexPath: IndexPath) {
-        let selectedTodo = hideCompletedItems ? todoItems.filter { !$0.isCompleted }[indexPath.row] : todoItems[indexPath.row]
+        let selectedTodo = hideCompletedItems ? fileCache.todoItems.filter { !$0.isCompleted }[indexPath.row] : fileCache.todoItems[indexPath.row]
         print(selectedTodo)
         let todoVC = TodoViewController(fileCache: fileCache, todo: selectedTodo)
         todoVC.delegate = self
@@ -126,11 +142,9 @@ class TodoListViewController: UIViewController {
     }
     
     @objc private func deleteItem(at indexPath: IndexPath) {
-        let selectedTodo = hideCompletedItems ? todoItems.filter { !$0.isCompleted }[indexPath.row] : todoItems[indexPath.row]
-        let index = todoItems.firstIndex(where: {$0.id == selectedTodo.id})
-        if let index = index {
-            todoItems.remove(at: index)
-        }
+        let selectedTodo = hideCompletedItems ? fileCache.todoItems.filter { !$0.isCompleted }[indexPath.row] : fileCache.todoItems[indexPath.row]
+        fileCache.delete(withId: selectedTodo.id)
+        saveData()
         tableView.reloadData()
     }
 }
@@ -139,9 +153,9 @@ class TodoListViewController: UIViewController {
 extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if hideCompletedItems {
-            return todoItems.filter { !$0.isCompleted }.count
+            return fileCache.todoItems.filter { !$0.isCompleted }.count
         } else {
-            return todoItems.count
+            return fileCache.todoItems.count
         }
     }
     
@@ -149,19 +163,17 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = TodoItemCell()
         
         if hideCompletedItems {
-            let uncompletedItems = todoItems.filter { !$0.isCompleted }
+            let uncompletedItems = fileCache.todoItems.filter { !$0.isCompleted }
             cell.configure(with: uncompletedItems[indexPath.row])
         } else {
-            cell.configure(with: todoItems[indexPath.row])
+            cell.configure(with: fileCache.todoItems[indexPath.row])
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
         changeCompletion(at: indexPath)
-        
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -173,7 +185,7 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
         stack.layoutMargins = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
         stack.isLayoutMarginsRelativeArrangement = true
         
-        label.text = "Выполнено - \(todoItems.filter{$0.isCompleted == true}.count)"
+        label.text = "Выполнено - \(fileCache.todoItems.filter{$0.isCompleted == true}.count)"
         label.font = .boldSystemFont(ofSize: 15)
         label.textColor = ColorPalette.tertiary
         
@@ -217,7 +229,7 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        let selectedTodo = hideCompletedItems ? todoItems.filter { !$0.isCompleted }[indexPath.row] : todoItems[indexPath.row]
+        let selectedTodo = hideCompletedItems ? fileCache.todoItems.filter { !$0.isCompleted }[indexPath.row] : fileCache.todoItems[indexPath.row]
         
         
         let previewProvider: () -> UIViewController? = { [weak self] in
@@ -249,7 +261,6 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension TodoListViewController: updateTable {
     func updateData() {
-        todoItems = fileCache.todoItems
         tableView.reloadData()
     }
 }
