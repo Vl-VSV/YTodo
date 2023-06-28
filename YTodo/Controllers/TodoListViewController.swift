@@ -153,13 +153,24 @@ class TodoListViewController: UIViewController {
 extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if hideCompletedItems {
-            return fileCache.todoItems.filter { !$0.isCompleted }.count
+            return fileCache.todoItems.filter { !$0.isCompleted }.count + 1
         } else {
-            return fileCache.todoItems.count
+            return fileCache.todoItems.count + 1
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if (indexPath.row == (hideCompletedItems ? fileCache.todoItems.filter { !$0.isCompleted }.count : fileCache.todoItems.count)) {
+            let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+            var contentConfig = cell.defaultContentConfiguration()
+            contentConfig.text = "Новое"
+            contentConfig.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 16, leading: 40, bottom: 16, trailing: 0)
+            contentConfig.textProperties.color = ColorPalette.tertiary ?? .green
+            cell.contentConfiguration = contentConfig
+            return cell
+        }
+        
         let cell = TodoItemCell()
         
         if hideCompletedItems {
@@ -173,7 +184,11 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        changeCompletion(at: indexPath)
+        if (indexPath.row == (hideCompletedItems ? fileCache.todoItems.filter { !$0.isCompleted }.count : fileCache.todoItems.count)) {
+            addButtonTapped()
+        } else {
+            changeCompletion(at: indexPath)
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -256,6 +271,13 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
         
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if (indexPath.row == (hideCompletedItems ? fileCache.todoItems.filter { !$0.isCompleted }.count : fileCache.todoItems.count)) {
+            return false
+        }
+        return true
     }
 }
 
