@@ -7,21 +7,18 @@
 
 import UIKit
 
+protocol updateTable {
+    func updateData()
+}
+
+
 class TodoListViewController: UIViewController {
     
     private var hideCompletedItems = false
+    private var fileCache: FileCache = FileCache()
     
     // MARK: - Data
-    private var todoItems: [TodoItem] = [
-        TodoItem(text: "Wash the car", priority: .normal, isCompleted: true, dateOfCreation: .now),
-        TodoItem(text: "Clean the room", priority: .high, deadline: Date(timeIntervalSinceNow: 72000), isCompleted: false, dateOfCreation: .now),
-        TodoItem(text: "Например, сейчас одна акция «Лукойла» стоит около 5700 рублей. Фьючерс на акции «Лукойла» — это, например, договор между покупателем и продавцом о том, что покупатель купит акции «Лукойла» у продавца по цене 5700 рублей через 3 месяца. При этом не важно, какая цена будет у акций через 3 месяца: цена сделки между покупателем и продавцом все равно останется 5700 рублей. Если реальная цена акции через три месяца не останется прежней, одна из сторон в любом случае понесет убытки.", priority: .normal, isCompleted: false, dateOfCreation: .now),
-        TodoItem(text: "Buy the floor", priority: .normal, deadline: Date(timeIntervalSince1970: 72000), isCompleted: false, dateOfCreation: .now),
-        TodoItem(text: "Finish homework", priority: .normal, isCompleted: false, dateOfCreation: Date()),
-        TodoItem(text: "Go for a run", priority: .low, isCompleted: true, dateOfCreation: Date()),
-        TodoItem(text: "Go to the cinema", priority: .low, deadline: .now, isCompleted: true, dateOfCreation: Date()),
-        TodoItem(text: "Например, сейчас одна акция «Лукойла» стоит около 5700 рублей. Фьючерс на акции «Лукойла» — это, например, договор между покупателем и продавцом о том, что покупатель купит акции «Лукойла» у продавца по цене 5700 рублей через 3 месяца. При этом не важно, какая цена будет у акций через 3 месяца: цена сделки между покупателем и продавцом все равно останется 5700 рублей. Если реальная цена акции через три месяца не останется прежней, одна из сторон в любом случае понесет убытки.", priority: .high, deadline: .now, isCompleted: true, dateOfCreation: .now),
-    ]
+    private var todoItems: [TodoItem] = []
     
     // MARK: - Properties
     private let tableView: UITableView = {
@@ -53,6 +50,13 @@ class TodoListViewController: UIViewController {
         title = "Мои Дела"
         setupNavigationBar()
         setupSubviews()
+        
+        do {
+            try fileCache.loadCSV(from: "SavedItems.csv")
+        } catch {
+            
+        }
+        todoItems = fileCache.todoItems
         
         view.backgroundColor = ColorPalette.backPrimary
         
@@ -90,7 +94,11 @@ class TodoListViewController: UIViewController {
     
     // MARK: - Handlers
     @objc private func addButtonTapped() {
-        
+        let todoVC = TodoViewController(fileCache: fileCache)
+        todoVC.delegate = self
+        let navigationController = UINavigationController(rootViewController: todoVC)
+        navigationController.modalPresentationStyle = .popover
+        self.present(navigationController, animated: true)
     }
     
     @objc private func filterButtonTapped() {
@@ -108,7 +116,13 @@ class TodoListViewController: UIViewController {
     }
     
     @objc private func goToDetailView(at indexPath: IndexPath) {
-
+        let selectedTodo = hideCompletedItems ? todoItems.filter { !$0.isCompleted }[indexPath.row] : todoItems[indexPath.row]
+        print(selectedTodo)
+        let todoVC = TodoViewController(fileCache: fileCache, todo: selectedTodo)
+        todoVC.delegate = self
+        let navigationController = UINavigationController(rootViewController: todoVC)
+        navigationController.modalPresentationStyle = .popover
+        self.present(navigationController, animated: true)
     }
     
     @objc private func deleteItem(at indexPath: IndexPath) {
@@ -201,5 +215,41 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
         
         return UISwipeActionsConfiguration(actions: [delete, info])
     }
+    
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let selectedTodo = hideCompletedItems ? todoItems.filter { !$0.isCompleted }[indexPath.row] : todoItems[indexPath.row]
+        
+        
+        let previewProvider: () -> UIViewController? = { [weak self] in
+            let todoVC = TodoViewController(fileCache: self!.fileCache, todo: selectedTodo)
+            let navigationController = UINavigationController(rootViewController: todoVC)
+            navigationController.modalPresentationStyle = .popover
+            return navigationController
+        }
+
+        let actionsProvider: ([UIMenuElement]) -> UIMenu? = { _ in
+            let deleteAction = UIAction(title: "Delete", image: UIImage(systemName: "trash")) { [weak self] _ in
+                self?.deleteItem(at: indexPath)
+            }
+
+            let editAction = UIAction(title: "Edit", image: UIImage(systemName: "pencil")) { [weak self] _ in
+                self?.goToDetailView(at: indexPath)
+            }
+
+            return UIMenu(title: "", children: [deleteAction, editAction])
+        }
+
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: previewProvider, actionProvider: actionsProvider)
+    }
+    
+    func tableView(_ tableView: UITableView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
+        
+    }
 }
 
+extension TodoListViewController: updateTable {
+    func updateData() {
+        todoItems = fileCache.todoItems
+        tableView.reloadData()
+    }
+}
