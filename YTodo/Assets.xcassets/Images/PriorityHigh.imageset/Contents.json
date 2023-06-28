@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Priority.png",
+      "filename" : "Property 1=Icon, Property 2=Priority, Property 3=Priority, Property 4=High.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Priority@2x.png",
+      "filename" : "Property 1=Icon, Property 2=Priority, Property 3=Priority, Property 4=High@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Priority@3x.png",
+      "filename" : "Property 1=Icon, Property 2=Priority, Property 3=Priority, Property 4=High@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
