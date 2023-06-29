@@ -8,6 +8,9 @@
 import UIKit
 
 class TodoItemCell: UITableViewCell {
+    
+    weak var delegate: CellTapped?
+    
     // MARK: - Initialization
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -73,10 +76,14 @@ class TodoItemCell: UITableViewCell {
         return stack
     }()
     
-    private let statusImage: UIImageView = {
-        let image = UIImageView(image: UIImage(systemName: "circle"))
-        image.tintColor = ColorPalette.separator
-        return image
+    let statusButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "circle"), for: .normal)
+        button.tintColor = ColorPalette.tertiary
+        button.addTarget(nil, action: #selector(buttonTapped), for: .touchUpInside)
+        button.isEnabled = true
+        button.isUserInteractionEnabled = true
+        return button
     }()
     
     // MARK: - Setup
@@ -92,11 +99,11 @@ class TodoItemCell: UITableViewCell {
         labelsStack.addArrangedSubview(priorityStack)
         labelsStack.addArrangedSubview(deadlineStack)
         
-        addSubview(statusImage)
-        addSubview(labelsStack)
-        addSubview(arrowIcon)
+        contentView.addSubview(statusButton)
+        contentView.addSubview(labelsStack)
+        contentView.addSubview(arrowIcon)
         
-        statusImage.translatesAutoresizingMaskIntoConstraints = false
+        statusButton.translatesAutoresizingMaskIntoConstraints = false
         labelsStack.translatesAutoresizingMaskIntoConstraints = false
         arrowIcon.translatesAutoresizingMaskIntoConstraints = false
         priorityIcon.translatesAutoresizingMaskIntoConstraints = false
@@ -104,18 +111,18 @@ class TodoItemCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
             
-            statusImage.centerYAnchor.constraint(equalTo: centerYAnchor),
-            statusImage.widthAnchor.constraint(equalToConstant: 24),
-            statusImage.heightAnchor.constraint(equalToConstant: 24),
-            statusImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            statusButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            statusButton.widthAnchor.constraint(equalToConstant: 24),
+            statusButton.heightAnchor.constraint(equalToConstant: 24),
+            statusButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             
-            labelsStack.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            labelsStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
-            labelsStack.leadingAnchor.constraint(equalTo: statusImage.trailingAnchor, constant: 12),
+            labelsStack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+            labelsStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
+            labelsStack.leadingAnchor.constraint(equalTo: statusButton.trailingAnchor, constant: 12),
             labelsStack.trailingAnchor.constraint(equalTo: arrowIcon.leadingAnchor, constant: -16),
             
-            arrowIcon.centerYAnchor.constraint(equalTo: centerYAnchor),
-            arrowIcon.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
+            arrowIcon.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            arrowIcon.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
             arrowIcon.widthAnchor.constraint(equalToConstant: 7),
             arrowIcon.heightAnchor.constraint(equalToConstant: 12),
             
@@ -133,15 +140,15 @@ class TodoItemCell: UITableViewCell {
         titleLabel.text = item.text
         
         if item.isCompleted {
-            statusImage.image = UIImage(systemName: "checkmark.circle.fill")
-            statusImage.tintColor = ColorPalette.green
+            statusButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+            statusButton.tintColor = ColorPalette.green
             
             let str = NSMutableAttributedString(string: item.text)
             str.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 1, range: NSRange(location: 0, length: str.length))
             titleLabel.attributedText = str
             titleLabel.textColor = ColorPalette.tertiary
         } else if item.priority == .high {
-            statusImage.tintColor = ColorPalette.red
+            statusButton.tintColor = ColorPalette.red
         }
         
         if let deadline = item.deadline {
@@ -161,4 +168,8 @@ class TodoItemCell: UITableViewCell {
         
     }
     
+    // MARK: - Handlers
+    @objc private func buttonTapped(){
+        delegate?.changeCompletion(self)
+    }
 }

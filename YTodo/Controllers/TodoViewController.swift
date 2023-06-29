@@ -14,7 +14,7 @@ class TodoViewController: UIViewController {
     private var scrollVeiwBottomConstraint: NSLayoutConstraint?
     var fileCache: FileCache
     var todo: TodoItem
-    weak var delegate: updateTable?
+    weak var delegate: UpdateTable?
     
     // MARK: - UIConstants
     private enum UIConstants {

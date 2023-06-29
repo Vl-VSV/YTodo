@@ -7,10 +7,14 @@
 
 import UIKit
 
-protocol updateTable: AnyObject {
+protocol UpdateTable: AnyObject {
     func updateData()
 }
 
+protocol CellTapped: AnyObject {
+    func changeCompletion(_ taskCell: TodoItemCell)
+    func didTapped()
+}
 
 class TodoListViewController: UIViewController {
     
@@ -126,11 +130,7 @@ class TodoListViewController: UIViewController {
         selectedTodo.isCompleted.toggle()
         fileCache.update(at: selectedTodo.id, to: selectedTodo)
         UIView.transition(with: tableView, duration: 0.5, options: .transitionCrossDissolve, animations: {self.tableView.reloadData()}, completion: nil)
-        do {
-            try fileCache.saveCSV(to: "SavedItems.csv")
-        } catch {
-            print(error)
-        }
+        saveData()
     }
     
     @objc private func goToDetailView(at indexPath: IndexPath) {
@@ -181,6 +181,7 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             cell.configure(with: fileCache.todoItems[indexPath.row])
         }
+        cell.delegate = self
         return cell
     }
     
@@ -189,7 +190,12 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
         if (indexPath.row == (hideCompletedItems ? fileCache.todoItems.filter { !$0.isCompleted }.count : fileCache.todoItems.count)) {
             addButtonTapped()
         } else {
-            changeCompletion(at: indexPath)
+            let selectedTodo = hideCompletedItems ? fileCache.todoItems.filter{ !$0.isCompleted }[indexPath.row] : fileCache.todoItems[indexPath.row]
+            let todoVC = TodoViewController(fileCache: fileCache, todo: fileCache.todoItems[indexPath.row])
+            todoVC.delegate = self
+            let navigationController = UINavigationController(rootViewController: todoVC)
+            navigationController.modalPresentationStyle = .popover
+            self.present(navigationController, animated: true)
         }
     }
     
@@ -284,8 +290,19 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension TodoListViewController: updateTable {
+extension TodoListViewController: UpdateTable {
     func updateData() {
         UIView.transition(with: tableView, duration: 0.5, options: .transitionCrossDissolve, animations: {self.tableView.reloadData()}, completion: nil)
+    }
+}
+
+extension TodoListViewController: CellTapped {
+    func changeCompletion(_ taskCell: TodoItemCell) {
+        guard let indexPath = tableView.indexPath(for: taskCell) else { return }
+        changeCompletion(at: indexPath)
+    }
+    
+    func didTapped() {
+        
     }
 }
