@@ -14,7 +14,7 @@ protocol updateTable {
 
 class TodoListViewController: UIViewController {
     
-    private var hideCompletedItems = false
+    private var hideCompletedItems = true
     private var fileCache: FileCache = FileCache()
     
     // MARK: - Properties
@@ -165,7 +165,7 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
             var contentConfig = cell.defaultContentConfiguration()
             contentConfig.text = "Новое"
-            contentConfig.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 16, leading: 40, bottom: 16, trailing: 0)
+            contentConfig.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 16, leading: 54, bottom: 16, trailing: 0)
             contentConfig.textProperties.color = ColorPalette.tertiary ?? .green
             cell.contentConfiguration = contentConfig
             return cell

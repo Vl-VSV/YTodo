@@ -100,6 +100,7 @@ class TodoItemCell: UITableViewCell {
         labelsStack.translatesAutoresizingMaskIntoConstraints = false
         arrowIcon.translatesAutoresizingMaskIntoConstraints = false
         priorityIcon.translatesAutoresizingMaskIntoConstraints = false
+        deadlineIcon.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             
@@ -120,6 +121,9 @@ class TodoItemCell: UITableViewCell {
             
             priorityIcon.widthAnchor.constraint(equalToConstant: 12),
             priorityIcon.heightAnchor.constraint(equalToConstant: 16),
+            
+            deadlineIcon.widthAnchor.constraint(equalToConstant: 16),
+            deadlineIcon.heightAnchor.constraint(equalToConstant: 15)
             
         ])
     }
