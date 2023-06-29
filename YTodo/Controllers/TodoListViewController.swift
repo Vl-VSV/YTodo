@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol updateTable {
+protocol updateTable: AnyObject {
     func updateData()
 }
 
@@ -112,18 +112,20 @@ class TodoListViewController: UIViewController {
         let navigationController = UINavigationController(rootViewController: todoVC)
         navigationController.modalPresentationStyle = .popover
         self.present(navigationController, animated: true)
+
     }
     
     @objc private func filterButtonTapped() {
         hideCompletedItems.toggle()
-        tableView.reloadData()
+        UIView.transition(with: tableView, duration: 0.5, options: .transitionCrossDissolve, animations: {self.tableView.reloadData()}, completion: nil)
+
     }
     
     @objc private func changeCompletion(at indexPath: IndexPath) {
         var selectedTodo = hideCompletedItems ? fileCache.todoItems.filter { !$0.isCompleted }[indexPath.row] : fileCache.todoItems[indexPath.row]
         selectedTodo.isCompleted.toggle()
         fileCache.update(at: selectedTodo.id, to: selectedTodo)
-        tableView.reloadData()
+        UIView.transition(with: tableView, duration: 0.5, options: .transitionCrossDissolve, animations: {self.tableView.reloadData()}, completion: nil)
         do {
             try fileCache.saveCSV(to: "SavedItems.csv")
         } catch {
@@ -145,7 +147,7 @@ class TodoListViewController: UIViewController {
         let selectedTodo = hideCompletedItems ? fileCache.todoItems.filter { !$0.isCompleted }[indexPath.row] : fileCache.todoItems[indexPath.row]
         fileCache.delete(withId: selectedTodo.id)
         saveData()
-        tableView.reloadData()
+        UIView.transition(with: tableView, duration: 0.5, options: .transitionCrossDissolve, animations: {self.tableView.reloadData()}, completion: nil)
     }
 }
 
@@ -248,7 +250,8 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
         
         
         let previewProvider: () -> UIViewController? = { [weak self] in
-            let todoVC = TodoViewController(fileCache: self!.fileCache, todo: selectedTodo)
+            guard let self = self else { return nil}
+            let todoVC = TodoViewController(fileCache: self.fileCache, todo: selectedTodo)
             let navigationController = UINavigationController(rootViewController: todoVC)
             navigationController.modalPresentationStyle = .popover
             return navigationController
@@ -283,6 +286,6 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension TodoListViewController: updateTable {
     func updateData() {
-        tableView.reloadData()
+        UIView.transition(with: tableView, duration: 0.5, options: .transitionCrossDissolve, animations: {self.tableView.reloadData()}, completion: nil)
     }
 }
