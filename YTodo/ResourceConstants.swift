@@ -27,7 +27,7 @@ enum ImageAssets {
     static let priorityLow = UIImage(named: "PriorityLow")
     static let priorityHigh = UIImage(named: "PriorityHigh")
     static let newTodoButton = UIImage(named: "NewTodoButton")
-    static let incomplete = UIImage(named: "Inclomplete")
+    static let incomplete = UIImage(named: "Incomplete")
     static let incompleteRed = UIImage(named: "IncompleteRed")
     static let complete = UIImage(named: "Complete")
 }

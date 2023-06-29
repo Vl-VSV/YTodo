@@ -76,9 +76,9 @@ class TodoItemCell: UITableViewCell {
         return stack
     }()
     
-    let statusButton: UIButton = {
+    private let statusButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "circle"), for: .normal)
+        button.setImage(ImageAssets.incomplete, for: .normal)
         button.tintColor = ColorPalette.tertiary
         button.addTarget(nil, action: #selector(buttonTapped), for: .touchUpInside)
         button.isEnabled = true
@@ -140,7 +140,7 @@ class TodoItemCell: UITableViewCell {
         titleLabel.text = item.text
         
         if item.isCompleted {
-            statusButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+            statusButton.setImage(ImageAssets.complete, for: .normal)
             statusButton.tintColor = ColorPalette.green
             
             let str = NSMutableAttributedString(string: item.text)
@@ -148,6 +148,7 @@ class TodoItemCell: UITableViewCell {
             titleLabel.attributedText = str
             titleLabel.textColor = ColorPalette.tertiary
         } else if item.priority == .high {
+            statusButton.setImage(ImageAssets.incompleteRed, for: .normal)
             statusButton.tintColor = ColorPalette.red
         }
         

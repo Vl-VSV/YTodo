@@ -27,6 +27,7 @@ class TodoListViewController: UIViewController {
         let viewb = UIView()
         viewb.backgroundColor = ColorPalette.backPrimary
         table.backgroundView = viewb
+        table.showsVerticalScrollIndicator = false
         return table
     }()
     
@@ -76,7 +77,7 @@ class TodoListViewController: UIViewController {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             
             addTodoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -191,7 +192,7 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
             addButtonTapped()
         } else {
             let selectedTodo = hideCompletedItems ? fileCache.todoItems.filter{ !$0.isCompleted }[indexPath.row] : fileCache.todoItems[indexPath.row]
-            let todoVC = TodoViewController(fileCache: fileCache, todo: fileCache.todoItems[indexPath.row])
+            let todoVC = TodoViewController(fileCache: fileCache, todo: selectedTodo)
             todoVC.delegate = self
             let navigationController = UINavigationController(rootViewController: todoVC)
             navigationController.modalPresentationStyle = .popover
