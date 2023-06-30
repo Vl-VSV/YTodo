@@ -88,7 +88,7 @@ class TodoViewController: UIViewController {
     
     // MARK: - Deinit
     deinit {
-        unsubdcribeToKeyboard()
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: - View Properties
@@ -166,7 +166,6 @@ class TodoViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(deadlineDateLabelTapped))
         label.isUserInteractionEnabled = true
         label.addGestureRecognizer(tapGesture)
-        
         return label
     }()
     
@@ -180,7 +179,7 @@ class TodoViewController: UIViewController {
     
     private lazy var deadlineSwitchView: UISwitch = {
         let deadlineSwitch = UISwitch()
-        deadlineSwitch.addTarget(self, action: #selector(UpdateDate), for: .valueChanged)
+        deadlineSwitch.addTarget(self, action: #selector(updateDate), for: .valueChanged)
         deadlineSwitch.isEnabled = false
         return deadlineSwitch
     }()
@@ -297,18 +296,14 @@ class TodoViewController: UIViewController {
             scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            bottomConstraint
-        ])
-        
-        NSLayoutConstraint.activate([
+            bottomConstraint,
+
             addNewTodoStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: UIConstants.addNewTodoStackViewLeadingPadding),
             addNewTodoStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: UIConstants.addNewTodoStackViewTrailingPadding),
             addNewTodoStackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: UIConstants.addNewTodoStackViewTopPadding),
             addNewTodoStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            addNewTodoStackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor)
-        ])
-        
-        NSLayoutConstraint.activate([
+            addNewTodoStackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+
             textView.heightAnchor.constraint(greaterThanOrEqualToConstant: UIConstants.textViewHeight),
             
             settingsStackView.leadingAnchor.constraint(equalTo: addNewTodoStackView.leadingAnchor),
@@ -323,8 +318,7 @@ class TodoViewController: UIViewController {
         ])
         
         self.scrollVeiwBottomConstraint = bottomConstraint
-        
-        UpdateDate()
+        updateDate()
     }
     
     private func subscribeToKeyboard() {
@@ -341,11 +335,7 @@ class TodoViewController: UIViewController {
             object: nil
         )
     }
-    
-    private func unsubdcribeToKeyboard() {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
+
     private func setupTodoInfo() {
         if todo.text != "" {
             textView.text = todo.text
@@ -359,7 +349,6 @@ class TodoViewController: UIViewController {
             case .high:
                 priorityPickerView.selectedSegmentIndex = 2
             }
-            
             if let deadline = todo.deadline {
                 deadlineSwitchView.setOn(true, animated: true)
                 secondDividerView.isHidden = true
@@ -379,7 +368,6 @@ class TodoViewController: UIViewController {
         let action = UIAlertAction(title: "Ок", style: .default)
         alert.addAction(action)
 
-        
         todo.text = textView.text
         guard todo.text != "" && todo.text != "Что надо сделать?" else {
             alert.message = "Некоректное описание задачи"
@@ -408,7 +396,6 @@ class TodoViewController: UIViewController {
     }
     
     @objc private func deleteButtonTapped() {
-        print("delete")
         fileCache.delete(withId: todo.id)
         DispatchQueue.main.async {
             do {
@@ -421,7 +408,7 @@ class TodoViewController: UIViewController {
         dismiss(animated: true)
     }
     
-    @objc private func UpdateDate() {
+    @objc private func updateDate() {
         
         if deadlineSwitchView.isOn == true {
             UIView.animate(withDuration: 0.5) {
@@ -436,7 +423,6 @@ class TodoViewController: UIViewController {
                 self.todo.deadline = nil
             }
         }
-        
     }
     
     @objc private func deadlineDateLabelTapped() {
@@ -477,8 +463,6 @@ class TodoViewController: UIViewController {
     }
     
     @objc private func priorityValueChanged() {
-        print("Priority Value Changed")
-        
         switch priorityPickerView.selectedSegmentIndex {
         case 0:
             todo.priority = .low
@@ -490,12 +474,10 @@ class TodoViewController: UIViewController {
             todo.priority = .normal
         }
     }
-    
 }
 
 // MARK: - UITextViewDelegate
 extension TodoViewController: UITextViewDelegate {
-    
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         if textView.text == "Что надо сделать?" {
             textView.text = nil
@@ -511,7 +493,7 @@ extension TodoViewController: UITextViewDelegate {
             textView.text = "Что надо сделать?"
             textView.textColor = ColorPalette.tertiary
             deadlineSwitchView.setOn(false, animated: true)
-            UpdateDate()
+            updateDate()
         }
         todo.text = textView.text
     }

@@ -170,7 +170,7 @@ class TodoItemCell: UITableViewCell {
     }
     
     // MARK: - Handlers
-    @objc private func buttonTapped(){
+    @objc private func buttonTapped() {
         delegate?.changeCompletion(self)
     }
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		85086EC828894C8D0DAAC647 /* Pods_YTodo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9035DB91BF9E3F5211E8F9C /* Pods_YTodo.framework */; };
+		8CC2DDA4E5F3666A85D58E81 /* Pods_YTodo_YTodoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6EC2F19AA2C4E031B58CF6F /* Pods_YTodo_YTodoUITests.framework */; };
 		A42B74822A4EDECB00AC117B /* CocoaLumberjack in Frameworks */ = {isa = PBXBuildFile; productRef = A42B74812A4EDECB00AC117B /* CocoaLumberjack */; };
 		A42B74842A4EDECB00AC117B /* CocoaLumberjackSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A42B74832A4EDECB00AC117B /* CocoaLumberjackSwift */; };
 		A439D4792A38E92D0098C35C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439D4782A38E92D0098C35C /* AppDelegate.swift */; };
@@ -25,6 +27,7 @@
 		A4525DB82A4998F60085770C /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4525DB72A4998F60085770C /* TodoListViewController.swift */; };
 		A46980FB2A433E490042F1CE /* ResourceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46980FA2A433E490042F1CE /* ResourceConstants.swift */; };
 		A4EE15302A3F2E7900329D0A /* TodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EE152F2A3F2E7900329D0A /* TodoViewController.swift */; };
+		AF0B361B7BF144AEC29E764D /* Pods_YTodoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F668847C0BAC674ECCB96654 /* Pods_YTodoTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +48,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		25CCC5DA583ADA5A8E275F24 /* Pods-YTodoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YTodoTests.release.xcconfig"; path = "Target Support Files/Pods-YTodoTests/Pods-YTodoTests.release.xcconfig"; sourceTree = "<group>"; };
+		31254DB2018429D41BD73DD6 /* Pods-YTodoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YTodoTests.debug.xcconfig"; path = "Target Support Files/Pods-YTodoTests/Pods-YTodoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		38DBF4DE757FF3E82049BE71 /* Pods-YTodo-YTodoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YTodo-YTodoUITests.release.xcconfig"; path = "Target Support Files/Pods-YTodo-YTodoUITests/Pods-YTodo-YTodoUITests.release.xcconfig"; sourceTree = "<group>"; };
+		68CBCC98C59AEFD2F2F11191 /* Pods-YTodo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YTodo.release.xcconfig"; path = "Target Support Files/Pods-YTodo/Pods-YTodo.release.xcconfig"; sourceTree = "<group>"; };
 		A439D4752A38E92D0098C35C /* YTodo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YTodo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A439D4782A38E92D0098C35C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A439D47A2A38E92D0098C35C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,6 +72,11 @@
 		A4525DB72A4998F60085770C /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
 		A46980FA2A433E490042F1CE /* ResourceConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceConstants.swift; sourceTree = "<group>"; };
 		A4EE152F2A3F2E7900329D0A /* TodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewController.swift; sourceTree = "<group>"; };
+		E6EC2F19AA2C4E031B58CF6F /* Pods_YTodo_YTodoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YTodo_YTodoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EDA7E6CB29F042C3DBA77FC6 /* Pods-YTodo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YTodo.debug.xcconfig"; path = "Target Support Files/Pods-YTodo/Pods-YTodo.debug.xcconfig"; sourceTree = "<group>"; };
+		F668847C0BAC674ECCB96654 /* Pods_YTodoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YTodoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9035DB91BF9E3F5211E8F9C /* Pods_YTodo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YTodo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCB246D2D4683E98CE6F706E /* Pods-YTodo-YTodoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YTodo-YTodoUITests.debug.xcconfig"; path = "Target Support Files/Pods-YTodo-YTodoUITests/Pods-YTodo-YTodoUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +86,7 @@
 			files = (
 				A42B74842A4EDECB00AC117B /* CocoaLumberjackSwift in Frameworks */,
 				A42B74822A4EDECB00AC117B /* CocoaLumberjack in Frameworks */,
+				85086EC828894C8D0DAAC647 /* Pods_YTodo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF0B361B7BF144AEC29E764D /* Pods_YTodoTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,12 +102,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CC2DDA4E5F3666A85D58E81 /* Pods_YTodo_YTodoUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		53A88DDAA2A1B738327E1431 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EDA7E6CB29F042C3DBA77FC6 /* Pods-YTodo.debug.xcconfig */,
+				68CBCC98C59AEFD2F2F11191 /* Pods-YTodo.release.xcconfig */,
+				FCB246D2D4683E98CE6F706E /* Pods-YTodo-YTodoUITests.debug.xcconfig */,
+				38DBF4DE757FF3E82049BE71 /* Pods-YTodo-YTodoUITests.release.xcconfig */,
+				31254DB2018429D41BD73DD6 /* Pods-YTodoTests.debug.xcconfig */,
+				25CCC5DA583ADA5A8E275F24 /* Pods-YTodoTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		A439D46C2A38E92D0098C35C = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +129,8 @@
 				A439D48E2A38E92F0098C35C /* YTodoTests */,
 				A439D4982A38E92F0098C35C /* YTodoUITests */,
 				A439D4762A38E92D0098C35C /* Products */,
+				53A88DDAA2A1B738327E1431 /* Pods */,
+				AC2ABB3771B4438C3B6DEA30 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -176,6 +206,16 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		AC2ABB3771B4438C3B6DEA30 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F9035DB91BF9E3F5211E8F9C /* Pods_YTodo.framework */,
+				E6EC2F19AA2C4E031B58CF6F /* Pods_YTodo_YTodoUITests.framework */,
+				F668847C0BAC674ECCB96654 /* Pods_YTodoTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -183,6 +223,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A439D49F2A38E92F0098C35C /* Build configuration list for PBXNativeTarget "YTodo" */;
 			buildPhases = (
+				A485F8632A4EF50100180C8D /* ShellScript */,
+				36E95AE4AC2C7A4303E0BCFB /* [CP] Check Pods Manifest.lock */,
 				A439D4712A38E92D0098C35C /* Sources */,
 				A439D4722A38E92D0098C35C /* Frameworks */,
 				A439D4732A38E92D0098C35C /* Resources */,
@@ -204,6 +246,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A439D4A22A38E92F0098C35C /* Build configuration list for PBXNativeTarget "YTodoTests" */;
 			buildPhases = (
+				6688EA2EDDE459757715A146 /* [CP] Check Pods Manifest.lock */,
 				A439D4872A38E92F0098C35C /* Sources */,
 				A439D4882A38E92F0098C35C /* Frameworks */,
 				A439D4892A38E92F0098C35C /* Resources */,
@@ -222,6 +265,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A439D4A52A38E92F0098C35C /* Build configuration list for PBXNativeTarget "YTodoUITests" */;
 			buildPhases = (
+				FDA40564ECAF7D6A5D4E0B51 /* [CP] Check Pods Manifest.lock */,
 				A439D4912A38E92F0098C35C /* Sources */,
 				A439D4922A38E92F0098C35C /* Frameworks */,
 				A439D4932A38E92F0098C35C /* Resources */,
@@ -308,6 +352,93 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		36E95AE4AC2C7A4303E0BCFB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YTodo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6688EA2EDDE459757715A146 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YTodoTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A485F8632A4EF50100180C8D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
+		};
+		FDA40564ECAF7D6A5D4E0B51 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YTodo-YTodoUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A439D4712A38E92D0098C35C /* Sources */ = {
@@ -495,6 +626,7 @@
 		};
 		A439D4A02A38E92F0098C35C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EDA7E6CB29F042C3DBA77FC6 /* Pods-YTodo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -523,6 +655,7 @@
 		};
 		A439D4A12A38E92F0098C35C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 68CBCC98C59AEFD2F2F11191 /* Pods-YTodo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -551,6 +684,7 @@
 		};
 		A439D4A32A38E92F0098C35C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 31254DB2018429D41BD73DD6 /* Pods-YTodoTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -571,6 +705,7 @@
 		};
 		A439D4A42A38E92F0098C35C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 25CCC5DA583ADA5A8E275F24 /* Pods-YTodoTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -591,6 +726,7 @@
 		};
 		A439D4A62A38E92F0098C35C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FCB246D2D4683E98CE6F706E /* Pods-YTodo-YTodoUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -609,6 +745,7 @@
 		};
 		A439D4A72A38E92F0098C35C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 38DBF4DE757FF3E82049BE71 /* Pods-YTodo-YTodoUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

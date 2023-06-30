@@ -1,0 +1,18 @@
+line_length:
+  - 200 # warning
+  - 250 # error
+
+type_body_length:
+  - 400 # warning
+  - 450 # error
+
+file_length:
+  warning: 500
+  error: 550
+
+identifier_name:
+  min_length: 3
+  max_length: 45
+
+disabled_rules:
+  - trailing_whitespace

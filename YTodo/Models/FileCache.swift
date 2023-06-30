@@ -115,4 +115,3 @@ extension FileCache {
         try data.write(to: path)
     }
 }
-
