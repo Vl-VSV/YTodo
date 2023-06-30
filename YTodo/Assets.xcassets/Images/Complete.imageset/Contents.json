@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Property 1=Priority, Property 2=Low.png",
+      "filename" : "Prop=on.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Property 1=Priority, Property 2=Low@2x.png",
+      "filename" : "Prop=on@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Property 1=Priority, Property 2=Low@3x.png",
+      "filename" : "Prop=on@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
@@ -21,6 +21,6 @@
     "version" : 1
   },
   "properties" : {
-    "template-rendering-intent" : "original"
+    "template-rendering-intent" : "template"
   }
 }

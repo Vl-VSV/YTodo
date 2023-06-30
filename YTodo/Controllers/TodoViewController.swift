@@ -12,9 +12,9 @@ class TodoViewController: UIViewController {
     
     // MARK: - Properties
     private var scrollVeiwBottomConstraint: NSLayoutConstraint?
-    private var fileCache = FileCache()
-    
-    private var todo: TodoItem = TodoItem(text: "", priority: .normal, isCompleted: false, dateOfCreation: .now)
+    var fileCache: FileCache
+    var todo: TodoItem
+    weak var delegate: UpdateTable?
     
     // MARK: - UIConstants
     private enum UIConstants {
@@ -66,12 +66,24 @@ class TodoViewController: UIViewController {
         textView.delegate = self
         
         setupNavigationBar()
+        setupTodoInfo()
         setupSubviews()
         subscribeToKeyboard()
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         tapGesture.cancelsTouchesInView = false
         scrollView.addGestureRecognizer(tapGesture)
+    }
+    
+    // MARK: - Init
+    init(fileCache: FileCache, todo: TodoItem = TodoItem(text: "", priority: .normal, isCompleted: false, dateOfCreation: .now)) {
+        self.fileCache = fileCache
+        self.todo = todo
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - Deinit
@@ -334,48 +346,79 @@ class TodoViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
+    private func setupTodoInfo() {
+        if todo.text != "" {
+            textView.text = todo.text
+            textView.textColor = ColorPalette.labelPrimary
+            
+            switch todo.priority {
+            case .low:
+                priorityPickerView.selectedSegmentIndex = 0
+            case .normal:
+                priorityPickerView.selectedSegmentIndex = 1
+            case .high:
+                priorityPickerView.selectedSegmentIndex = 2
+            }
+            
+            if let deadline = todo.deadline {
+                deadlineSwitchView.setOn(true, animated: true)
+                secondDividerView.isHidden = true
+                datePicker.isHidden = true
+                deadlineDateLabel.isHidden = false
+                deadlineDateLabel.text = "\(deadline.formatted(.dateTime.day().month().year()))"
+            }
+            deadlineSwitchView.isEnabled = true
+            deleteButton.isEnabled = true
+        }
+    }
+    
     // MARK: - Handlers
     @objc private func saveButtonTapped() {
-        print("Save Tapped")
         
-        let alert = UIAlertController(title: "", message: "Файл успешно сохранен", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Ошибка", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "Ок", style: .default)
         alert.addAction(action)
 
         
         todo.text = textView.text
         guard todo.text != "" && todo.text != "Что надо сделать?" else {
-            alert.title = "Ошибка"
             alert.message = "Некоректное описание задачи"
             present(alert, animated: true, completion: nil)
             return
         }
-        
-        fileCache.add(todo)
-        do {
-            try fileCache.saveCSV(to: "SavedItems.csv")
-        } catch {
-            alert.title = "Ошибка"
-            alert.message = error.localizedDescription
+        if fileCache.todoItems.contains(where: {$0.id == todo.id}) {
+            fileCache.update(at: todo.id, to: todo)
+        } else {
+            fileCache.add(todo)
         }
-        
-        present(alert, animated: true, completion: nil)
-        
+        DispatchQueue.main.async {
+            do {
+                try self.fileCache.saveCSV(to: "SavedItems.csv")
+                self.delegate?.updateData()
+            } catch {
+                alert.message = error.localizedDescription
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+        dismiss(animated: true)
     }
     
     @objc private func cancelButtonTapped() {
-        print("Cancel Tapped")
+        dismiss(animated: true)
     }
     
     @objc private func deleteButtonTapped() {
-        print("Delete Tapped")
-        
+        print("delete")
         fileCache.delete(withId: todo.id)
-        do {
-            try fileCache.saveCSV(to: "SavedItems.csv")
-        } catch {
-            print(error)
+        DispatchQueue.main.async {
+            do {
+                try self.fileCache.saveCSV(to: "SavedItems.csv")
+            } catch {
+                print(error)
+            }
         }
+        delegate?.updateData()
+        dismiss(animated: true)
     }
     
     @objc private func UpdateDate() {

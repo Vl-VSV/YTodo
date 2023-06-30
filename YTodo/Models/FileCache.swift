@@ -26,6 +26,18 @@ final class FileCache {
         }
     }
     
+    func update(at id: String, to item: TodoItem) {
+        let itemIndex = todoItems.firstIndex(where: {$0.id == id})
+        if let itemIndex = itemIndex {
+            todoItems[itemIndex].text = item.text
+            todoItems[itemIndex].deadline = item.deadline
+            todoItems[itemIndex].dateOfCreation = item.dateOfCreation
+            todoItems[itemIndex].isCompleted = item.isCompleted
+            todoItems[itemIndex].priority = item.priority
+            todoItems[itemIndex].dateOfChange = .now
+        }
+    }
+    
     func delete(withId id: String) {
         todoItems.removeAll(where: { $0.id == id})
     }
