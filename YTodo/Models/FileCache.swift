@@ -107,7 +107,6 @@ extension FileCache {
         }
         
         let path = dir.appending(path: file)
-        print(path)
         var dataString = "id;text;priority;deadline;isCompleted;dateOfCreation;dateOfChange"
         for item in todoItems {
             dataString += "\n" + item.csv

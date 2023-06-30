@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A42B74822A4EDECB00AC117B /* CocoaLumberjack in Frameworks */ = {isa = PBXBuildFile; productRef = A42B74812A4EDECB00AC117B /* CocoaLumberjack */; };
+		A42B74842A4EDECB00AC117B /* CocoaLumberjackSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A42B74832A4EDECB00AC117B /* CocoaLumberjackSwift */; };
 		A439D4792A38E92D0098C35C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439D4782A38E92D0098C35C /* AppDelegate.swift */; };
 		A439D47B2A38E92D0098C35C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439D47A2A38E92D0098C35C /* SceneDelegate.swift */; };
 		A439D4802A38E92D0098C35C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A439D47E2A38E92D0098C35C /* Main.storyboard */; };
@@ -70,6 +72,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A42B74842A4EDECB00AC117B /* CocoaLumberjackSwift in Frameworks */,
+				A42B74822A4EDECB00AC117B /* CocoaLumberjack in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,6 +192,10 @@
 			dependencies = (
 			);
 			name = YTodo;
+			packageProductDependencies = (
+				A42B74812A4EDECB00AC117B /* CocoaLumberjack */,
+				A42B74832A4EDECB00AC117B /* CocoaLumberjackSwift */,
+			);
 			productName = YTodo;
 			productReference = A439D4752A38E92D0098C35C /* YTodo.app */;
 			productType = "com.apple.product-type.application";
@@ -260,6 +268,9 @@
 				Base,
 			);
 			mainGroup = A439D46C2A38E92D0098C35C;
+			packageReferences = (
+				A42B74802A4EDECB00AC117B /* XCRemoteSwiftPackageReference "CocoaLumberjack" */,
+			);
 			productRefGroup = A439D4762A38E92D0098C35C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -654,6 +665,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A42B74802A4EDECB00AC117B /* XCRemoteSwiftPackageReference "CocoaLumberjack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CocoaLumberjack/CocoaLumberjack";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A42B74812A4EDECB00AC117B /* CocoaLumberjack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A42B74802A4EDECB00AC117B /* XCRemoteSwiftPackageReference "CocoaLumberjack" */;
+			productName = CocoaLumberjack;
+		};
+		A42B74832A4EDECB00AC117B /* CocoaLumberjackSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A42B74802A4EDECB00AC117B /* XCRemoteSwiftPackageReference "CocoaLumberjack" */;
+			productName = CocoaLumberjackSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A439D46D2A38E92D0098C35C /* Project object */;
 }

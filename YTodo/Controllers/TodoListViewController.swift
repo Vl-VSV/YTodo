@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CocoaLumberjackSwift
 
 protocol UpdateTable: AnyObject {
     func updateData()
@@ -52,6 +53,7 @@ class TodoListViewController: UIViewController {
         title = "Мои Дела"
         setupNavigationBar()
         setupSubviews()
+        setupLogger()
         loadDate()
         
         view.backgroundColor = ColorPalette.backPrimary
@@ -88,13 +90,23 @@ class TodoListViewController: UIViewController {
         ])
     }
     
+    private func setupLogger() {
+        DDLog.add(DDOSLogger.sharedInstance)
+
+        let fileLogger: DDFileLogger = DDFileLogger()
+        fileLogger.rollingFrequency = 60 * 60 * 24
+        fileLogger.logFileManager.maximumNumberOfLogFiles = 7
+        DDLog.add(fileLogger)
+    }
+    
     // MARK: - Functions
     private func loadDate() {
         DispatchQueue.main.async {
             do{
                 try self.fileCache.loadCSV(from: "SavedItems.csv")
+                DDLogDebug("Успешная загрузка данных")
             } catch {
-                print(error)
+                DDLogDebug("Ошибка при загрузке данных, \(error)")
             }
             self.tableView.reloadData()
         }
@@ -104,8 +116,9 @@ class TodoListViewController: UIViewController {
         DispatchQueue.main.async {
             do{
                 try self.fileCache.saveCSV(to: "SavedItems.csv")
+                DDLogDebug("Успешное сохранение данных")
             } catch {
-                print(error)
+                DDLogDebug("Ошибка при записи данных, \(error)")
             }
         }
     }
