@@ -59,12 +59,12 @@ extension TodoItem {
         
         let priority = (json["priority"] as? String).flatMap(Priority.init(rawValue:)) ?? .normal
          
-        var deadline: Date? = nil
+        var deadline: Date?
         if let deadlineDoubleValue = json["deadline"] as? Double {
             deadline = Date(timeIntervalSince1970: deadlineDoubleValue)
         }
         
-        var dateOfChange: Date? = nil
+        var dateOfChange: Date?
         if let dateOfChangeDoubleValue = json["dateOfChange"] as? Double {
             dateOfChange = Date(timeIntervalSince1970: dateOfChangeDoubleValue)
         }
@@ -80,7 +80,6 @@ extension TodoItem {
         result["text"] = text
         result["isCompleted"] = isCompleted
         result["dateOfCreation"] = Double(dateOfCreation.timeIntervalSince1970)
-        
         
         if priority != .normal {
             result["priority"] = priority.rawValue
@@ -129,12 +128,12 @@ extension TodoItem {
         }
         let dateOfCreation = Date(timeIntervalSince1970: dateOfCreationDoubleValue)
         
-        var deadline: Date? = nil
+        var deadline: Date?
         if let deadlineDoubleValue = Double(deadlineString) {
             deadline = Date(timeIntervalSince1970: deadlineDoubleValue)
         }
         
-        var dateOfChange: Date? = nil
+        var dateOfChange: Date?
         if let dateOfChangeDoubleValue = Double(dateOfChangeString) {
             dateOfChange = Date(timeIntervalSince1970: dateOfChangeDoubleValue)
         }

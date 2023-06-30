@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CocoaLumberjackSwift
 
 protocol UpdateTable: AnyObject {
     func updateData()
@@ -52,6 +53,7 @@ class TodoListViewController: UIViewController {
         title = "Мои Дела"
         setupNavigationBar()
         setupSubviews()
+        setupLogger()
         loadDate()
         
         view.backgroundColor = ColorPalette.backPrimary
@@ -88,13 +90,23 @@ class TodoListViewController: UIViewController {
         ])
     }
     
+    private func setupLogger() {
+        DDLog.add(DDOSLogger.sharedInstance)
+
+        let fileLogger: DDFileLogger = DDFileLogger()
+        fileLogger.rollingFrequency = 60 * 60 * 24
+        fileLogger.logFileManager.maximumNumberOfLogFiles = 7
+        DDLog.add(fileLogger)
+    }
+    
     // MARK: - Functions
     private func loadDate() {
         DispatchQueue.main.async {
-            do{
+            do {
                 try self.fileCache.loadCSV(from: "SavedItems.csv")
+                DDLogDebug("Успешная загрузка данных")
             } catch {
-                print(error)
+                DDLogDebug("Ошибка при загрузке данных, \(error)")
             }
             self.tableView.reloadData()
         }
@@ -102,10 +114,11 @@ class TodoListViewController: UIViewController {
     
     private func saveData() {
         DispatchQueue.main.async {
-            do{
+            do {
                 try self.fileCache.saveCSV(to: "SavedItems.csv")
+                DDLogDebug("Успешное сохранение данных")
             } catch {
-                print(error)
+                DDLogDebug("Ошибка при записи данных, \(error)")
             }
         }
     }
@@ -136,7 +149,6 @@ class TodoListViewController: UIViewController {
     
     @objc private func goToDetailView(at indexPath: IndexPath) {
         let selectedTodo = hideCompletedItems ? fileCache.todoItems.filter { !$0.isCompleted }[indexPath.row] : fileCache.todoItems[indexPath.row]
-        print(selectedTodo)
         let todoVC = TodoViewController(fileCache: fileCache, todo: selectedTodo)
         todoVC.delegate = self
         let navigationController = UINavigationController(rootViewController: todoVC)
@@ -188,10 +200,10 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if (indexPath.row == (hideCompletedItems ? fileCache.todoItems.filter { !$0.isCompleted }.count : fileCache.todoItems.count)) {
+        if (indexPath.row == (hideCompletedItems ? fileCache.todoItems.filter {!$0.isCompleted}.count : fileCache.todoItems.count)) {
             addButtonTapped()
         } else {
-            let selectedTodo = hideCompletedItems ? fileCache.todoItems.filter{ !$0.isCompleted }[indexPath.row] : fileCache.todoItems[indexPath.row]
+            let selectedTodo = hideCompletedItems ? fileCache.todoItems.filter {!$0.isCompleted}[indexPath.row] : fileCache.todoItems[indexPath.row]
             let todoVC = TodoViewController(fileCache: fileCache, todo: selectedTodo)
             todoVC.delegate = self
             let navigationController = UINavigationController(rootViewController: todoVC)
@@ -209,7 +221,7 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
         stack.layoutMargins = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
         stack.isLayoutMarginsRelativeArrangement = true
         
-        label.text = "Выполнено - \(fileCache.todoItems.filter{$0.isCompleted == true}.count)"
+        label.text = "Выполнено - \(fileCache.todoItems.filter {$0.isCompleted == true}.count)"
         label.font = .boldSystemFont(ofSize: 15)
         label.textColor = ColorPalette.tertiary
         
@@ -224,7 +236,7 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let action = UIContextualAction(style: .normal, title: nil) { [weak self] (action, view, completionHandler) in
+        let action = UIContextualAction(style: .normal, title: nil) { [weak self] (_, _, completionHandler) in
             self?.changeCompletion(at: indexPath)
             completionHandler(true)
         }
@@ -235,14 +247,14 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let info = UIContextualAction(style: .normal, title: nil) { [weak self] (action, view, completionHandler) in
+        let info = UIContextualAction(style: .normal, title: nil) { [weak self] (_, _, completionHandler) in
             self?.goToDetailView(at: indexPath)
             completionHandler(true)
         }
         info.backgroundColor = ColorPalette.lightGray
         info.image = UIImage(systemName: "info.circle.fill")
         
-        let delete = UIContextualAction(style: .normal, title: nil) { [weak self] (action, view, completionHandler) in
+        let delete = UIContextualAction(style: .normal, title: nil) { [weak self] (_, _, completionHandler) in
             self?.deleteItem(at: indexPath)
             completionHandler(true)
         }
@@ -253,8 +265,10 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        if indexPath.row == (hideCompletedItems ? fileCache.todoItems.filter { !$0.isCompleted }.count : fileCache.todoItems.count ) {
+            return nil
+        }
         let selectedTodo = hideCompletedItems ? fileCache.todoItems.filter { !$0.isCompleted }[indexPath.row] : fileCache.todoItems[indexPath.row]
-        
         
         let previewProvider: () -> UIViewController? = { [weak self] in
             guard let self = self else { return nil}

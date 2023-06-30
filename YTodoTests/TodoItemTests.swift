@@ -183,4 +183,3 @@ final class TodoItemTests: XCTestCase {
         XCTAssertNil(TodoItem.parse(csv: csv))
     }
 }
-
