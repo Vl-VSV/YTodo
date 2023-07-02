@@ -1,6 +1,0 @@
-framework module Pods_YTodo_YTodoUITests {
-  umbrella header "Pods-YTodo-YTodoUITests-umbrella.h"
-
-  export *
-  module * { export * }
-}
