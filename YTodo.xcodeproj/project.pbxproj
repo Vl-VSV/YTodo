@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A42B74822A4EDECB00AC117B /* CocoaLumberjack in Frameworks */ = {isa = PBXBuildFile; productRef = A42B74812A4EDECB00AC117B /* CocoaLumberjack */; };
-		A42B74842A4EDECB00AC117B /* CocoaLumberjackSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A42B74832A4EDECB00AC117B /* CocoaLumberjackSwift */; };
 		A439D4792A38E92D0098C35C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439D4782A38E92D0098C35C /* AppDelegate.swift */; };
 		A439D47B2A38E92D0098C35C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439D47A2A38E92D0098C35C /* SceneDelegate.swift */; };
 		A439D4802A38E92D0098C35C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A439D47E2A38E92D0098C35C /* Main.storyboard */; };
@@ -25,6 +23,7 @@
 		A4525DB82A4998F60085770C /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4525DB72A4998F60085770C /* TodoListViewController.swift */; };
 		A46980FB2A433E490042F1CE /* ResourceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46980FA2A433E490042F1CE /* ResourceConstants.swift */; };
 		A48555812A51E92000509444 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48555802A51E92000509444 /* NetworkService.swift */; };
+		A4CAD0402A56A36E003FA9DE /* SaveService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CAD03F2A56A36E003FA9DE /* SaveService.swift */; };
 		A4D4F8422A5409BB00C57C95 /* TodoItemForResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D4F8412A5409BB00C57C95 /* TodoItemForResponse.swift */; };
 		A4EE15302A3F2E7900329D0A /* TodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EE152F2A3F2E7900329D0A /* TodoViewController.swift */; };
 /* End PBXBuildFile section */
@@ -67,6 +66,7 @@
 		A4525DB72A4998F60085770C /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
 		A46980FA2A433E490042F1CE /* ResourceConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceConstants.swift; sourceTree = "<group>"; };
 		A48555802A51E92000509444 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		A4CAD03F2A56A36E003FA9DE /* SaveService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveService.swift; sourceTree = "<group>"; };
 		A4D4F8412A5409BB00C57C95 /* TodoItemForResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItemForResponse.swift; sourceTree = "<group>"; };
 		A4EE152F2A3F2E7900329D0A /* TodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -76,8 +76,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A42B74842A4EDECB00AC117B /* CocoaLumberjackSwift in Frameworks */,
-				A42B74822A4EDECB00AC117B /* CocoaLumberjack in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,6 +131,7 @@
 				A439D47A2A38E92D0098C35C /* SceneDelegate.swift */,
 				A46980FA2A433E490042F1CE /* ResourceConstants.swift */,
 				A48555802A51E92000509444 /* NetworkService.swift */,
+				A4CAD03F2A56A36E003FA9DE /* SaveService.swift */,
 				A4D8B26C2A40BF270086FD3F /* Controllers */,
 				A4D8B26B2A40BF0C0086FD3F /* Models */,
 				A4D8B26A2A40BF010086FD3F /* Views */,
@@ -208,8 +207,6 @@
 			);
 			name = YTodo;
 			packageProductDependencies = (
-				A42B74812A4EDECB00AC117B /* CocoaLumberjack */,
-				A42B74832A4EDECB00AC117B /* CocoaLumberjackSwift */,
 			);
 			productName = YTodo;
 			productReference = A439D4752A38E92D0098C35C /* YTodo.app */;
@@ -284,7 +281,6 @@
 			);
 			mainGroup = A439D46C2A38E92D0098C35C;
 			packageReferences = (
-				A42B74802A4EDECB00AC117B /* XCRemoteSwiftPackageReference "CocoaLumberjack" */,
 				A40741552A51CD960017C249 /* XCRemoteSwiftPackageReference "SwiftLint" */,
 			);
 			productRefGroup = A439D4762A38E92D0098C35C /* Products */;
@@ -339,6 +335,7 @@
 				A439D4AB2A38EA510098C35C /* FileCache.swift in Sources */,
 				A4EE15302A3F2E7900329D0A /* TodoViewController.swift in Sources */,
 				A439D47B2A38E92D0098C35C /* SceneDelegate.swift in Sources */,
+				A4CAD0402A56A36E003FA9DE /* SaveService.swift in Sources */,
 				A4D4F8422A5409BB00C57C95 /* TodoItemForResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -697,14 +694,6 @@
 				minimumVersion = 0.52.3;
 			};
 		};
-		A42B74802A4EDECB00AC117B /* XCRemoteSwiftPackageReference "CocoaLumberjack" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/CocoaLumberjack/CocoaLumberjack";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -712,16 +701,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A40741552A51CD960017C249 /* XCRemoteSwiftPackageReference "SwiftLint" */;
 			productName = "plugin:SwiftLintPlugin";
-		};
-		A42B74812A4EDECB00AC117B /* CocoaLumberjack */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A42B74802A4EDECB00AC117B /* XCRemoteSwiftPackageReference "CocoaLumberjack" */;
-			productName = CocoaLumberjack;
-		};
-		A42B74832A4EDECB00AC117B /* CocoaLumberjackSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A42B74802A4EDECB00AC117B /* XCRemoteSwiftPackageReference "CocoaLumberjack" */;
-			productName = CocoaLumberjackSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

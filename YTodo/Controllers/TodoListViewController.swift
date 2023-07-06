@@ -6,21 +6,21 @@
 //
 
 import UIKit
-import CocoaLumberjackSwift
 
 protocol UpdateTable: AnyObject {
     func updateData()
+    func startLoading()
+    func completeLoading()
 }
 
 protocol CellTapped: AnyObject {
     func changeCompletion(_ taskCell: TodoItemCell)
-    func didTapped()
 }
 
 class TodoListViewController: UIViewController {
     
     private var hideCompletedItems = true
-    private var fileCache: FileCache = FileCache()
+    private var saveService: SaveService = SaveService()
     
     // MARK: - Properties
     private let tableView: UITableView = {
@@ -53,13 +53,14 @@ class TodoListViewController: UIViewController {
         title = "Мои Дела"
         setupNavigationBar()
         setupSubviews()
-        setupLogger()
-        loadDate()
         
         view.backgroundColor = ColorPalette.backPrimary
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        saveService.delegate = self
+        saveService.loadData()
     }
     
     // MARK: - Setup Functions
@@ -90,42 +91,27 @@ class TodoListViewController: UIViewController {
         ])
     }
     
-    private func setupLogger() {
-        DDLog.add(DDOSLogger.sharedInstance)
-
-        let fileLogger: DDFileLogger = DDFileLogger()
-        fileLogger.rollingFrequency = 60 * 60 * 24
-        fileLogger.logFileManager.maximumNumberOfLogFiles = 7
-        DDLog.add(fileLogger)
-    }
-    
     // MARK: - Functions
-    private func loadDate() {
-        DispatchQueue.main.async {
-            do {
-                try self.fileCache.loadCSV(from: "SavedItems.csv")
-                DDLogDebug("Успешная загрузка данных")
-            } catch {
-                DDLogDebug("Ошибка при загрузке данных, \(error)")
-            }
-            self.tableView.reloadData()
-        }
-    }
     
-    private func saveData() {
+    private func showLoadingView() {
         DispatchQueue.main.async {
-            do {
-                try self.fileCache.saveCSV(to: "SavedItems.csv")
-                DDLogDebug("Успешное сохранение данных")
-            } catch {
-                DDLogDebug("Ошибка при записи данных, \(error)")
-            }
+            let nactivityIndicator = UIActivityIndicatorView(style: .medium)
+            let barButton = UIBarButtonItem(customView: nactivityIndicator)
+            self.navigationItem.setRightBarButton(barButton, animated: true)
+            nactivityIndicator.startAnimating()
+        }
+        
+    }
+
+    private func hideLoadingView() {
+        DispatchQueue.main.async {
+            self.navigationItem.setRightBarButton(nil, animated: true)
         }
     }
     
     // MARK: - Handlers
     @objc private func addButtonTapped() {
-        let todoVC = TodoViewController(fileCache: fileCache)
+        let todoVC = TodoViewController(saveService: saveService)
         todoVC.delegate = self
         let navigationController = UINavigationController(rootViewController: todoVC)
         navigationController.modalPresentationStyle = .popover
@@ -140,16 +126,15 @@ class TodoListViewController: UIViewController {
     }
     
     @objc private func changeCompletion(at indexPath: IndexPath) {
-        var selectedTodo = hideCompletedItems ? fileCache.todoItems.filter { !$0.isCompleted }[indexPath.row] : fileCache.todoItems[indexPath.row]
+        var selectedTodo = hideCompletedItems ? saveService.todoItems.filter { !$0.isCompleted }[indexPath.row] : saveService.todoItems[indexPath.row]
         selectedTodo.isCompleted.toggle()
-        fileCache.update(at: selectedTodo.id, to: selectedTodo)
+        saveService.update(selectedTodo)
         UIView.transition(with: tableView, duration: 0.5, options: .transitionCrossDissolve, animations: {self.tableView.reloadData()}, completion: nil)
-        saveData()
     }
     
     @objc private func goToDetailView(at indexPath: IndexPath) {
-        let selectedTodo = hideCompletedItems ? fileCache.todoItems.filter { !$0.isCompleted }[indexPath.row] : fileCache.todoItems[indexPath.row]
-        let todoVC = TodoViewController(fileCache: fileCache, todo: selectedTodo)
+        let selectedTodo = hideCompletedItems ? saveService.todoItems.filter { !$0.isCompleted }[indexPath.row] : saveService.todoItems[indexPath.row]
+        let todoVC = TodoViewController(saveService: saveService, todo: selectedTodo)
         todoVC.delegate = self
         let navigationController = UINavigationController(rootViewController: todoVC)
         navigationController.modalPresentationStyle = .popover
@@ -157,9 +142,8 @@ class TodoListViewController: UIViewController {
     }
     
     @objc private func deleteItem(at indexPath: IndexPath) {
-        let selectedTodo = hideCompletedItems ? fileCache.todoItems.filter { !$0.isCompleted }[indexPath.row] : fileCache.todoItems[indexPath.row]
-        fileCache.delete(withId: selectedTodo.id)
-        saveData()
+        let selectedTodo = hideCompletedItems ? saveService.todoItems.filter { !$0.isCompleted }[indexPath.row] : saveService.todoItems[indexPath.row]
+        saveService.delete(withId: selectedTodo.id)
         UIView.transition(with: tableView, duration: 0.5, options: .transitionCrossDissolve, animations: {self.tableView.reloadData()}, completion: nil)
     }
 }
@@ -168,15 +152,15 @@ class TodoListViewController: UIViewController {
 extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if hideCompletedItems {
-            return fileCache.todoItems.filter { !$0.isCompleted }.count + 1
+            return saveService.todoItems.filter { !$0.isCompleted }.count + 1
         } else {
-            return fileCache.todoItems.count + 1
+            return saveService.todoItems.count + 1
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if (indexPath.row == (hideCompletedItems ? fileCache.todoItems.filter { !$0.isCompleted }.count : fileCache.todoItems.count)) {
+        if (indexPath.row == (hideCompletedItems ? saveService.todoItems.filter { !$0.isCompleted }.count : saveService.todoItems.count)) {
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
             var contentConfig = cell.defaultContentConfiguration()
             contentConfig.text = "Новое"
@@ -189,10 +173,10 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = TodoItemCell()
         
         if hideCompletedItems {
-            let uncompletedItems = fileCache.todoItems.filter { !$0.isCompleted }
+            let uncompletedItems = saveService.todoItems.filter { !$0.isCompleted }
             cell.configure(with: uncompletedItems[indexPath.row])
         } else {
-            cell.configure(with: fileCache.todoItems[indexPath.row])
+            cell.configure(with: saveService.todoItems[indexPath.row])
         }
         cell.delegate = self
         return cell
@@ -200,11 +184,11 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if (indexPath.row == (hideCompletedItems ? fileCache.todoItems.filter {!$0.isCompleted}.count : fileCache.todoItems.count)) {
+        if (indexPath.row == (hideCompletedItems ? saveService.todoItems.filter {!$0.isCompleted}.count : saveService.todoItems.count)) {
             addButtonTapped()
         } else {
-            let selectedTodo = hideCompletedItems ? fileCache.todoItems.filter {!$0.isCompleted}[indexPath.row] : fileCache.todoItems[indexPath.row]
-            let todoVC = TodoViewController(fileCache: fileCache, todo: selectedTodo)
+            let selectedTodo = hideCompletedItems ? saveService.todoItems.filter {!$0.isCompleted}[indexPath.row] : saveService.todoItems[indexPath.row]
+            let todoVC = TodoViewController(saveService: saveService, todo: selectedTodo)
             todoVC.delegate = self
             let navigationController = UINavigationController(rootViewController: todoVC)
             navigationController.modalPresentationStyle = .popover
@@ -221,7 +205,7 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
         stack.layoutMargins = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
         stack.isLayoutMarginsRelativeArrangement = true
         
-        label.text = "Выполнено - \(fileCache.todoItems.filter {$0.isCompleted == true}.count)"
+        label.text = "Выполнено - \(saveService.todoItems.filter {$0.isCompleted == true}.count)"
         label.font = .boldSystemFont(ofSize: 15)
         label.textColor = ColorPalette.tertiary
         
@@ -265,14 +249,14 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        if indexPath.row == (hideCompletedItems ? fileCache.todoItems.filter { !$0.isCompleted }.count : fileCache.todoItems.count ) {
+        if indexPath.row == (hideCompletedItems ? saveService.todoItems.filter { !$0.isCompleted }.count : saveService.todoItems.count ) {
             return nil
         }
-        let selectedTodo = hideCompletedItems ? fileCache.todoItems.filter { !$0.isCompleted }[indexPath.row] : fileCache.todoItems[indexPath.row]
+        let selectedTodo = hideCompletedItems ? saveService.todoItems.filter { !$0.isCompleted }[indexPath.row] : saveService.todoItems[indexPath.row]
         
         let previewProvider: () -> UIViewController? = { [weak self] in
-            guard let self = self else { return nil}
-            let todoVC = TodoViewController(fileCache: self.fileCache, todo: selectedTodo)
+            guard let self = self else { return nil }
+            let todoVC = TodoViewController(saveService: self.saveService, todo: selectedTodo)
             let navigationController = UINavigationController(rootViewController: todoVC)
             navigationController.modalPresentationStyle = .popover
             return navigationController
@@ -298,7 +282,7 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        if (indexPath.row == (hideCompletedItems ? fileCache.todoItems.filter { !$0.isCompleted }.count : fileCache.todoItems.count)) {
+        if (indexPath.row == (hideCompletedItems ? saveService.todoItems.filter { !$0.isCompleted }.count : saveService.todoItems.count)) {
             return false
         }
         return true
@@ -309,15 +293,19 @@ extension TodoListViewController: UpdateTable {
     func updateData() {
         UIView.transition(with: tableView, duration: 0.5, options: .transitionCrossDissolve, animations: {self.tableView.reloadData()}, completion: nil)
     }
+    
+    func startLoading() {
+        self.showLoadingView()
+    }
+    
+    func completeLoading() {
+        self.hideLoadingView()
+    }
 }
 
 extension TodoListViewController: CellTapped {
     func changeCompletion(_ taskCell: TodoItemCell) {
         guard let indexPath = tableView.indexPath(for: taskCell) else { return }
         changeCompletion(at: indexPath)
-    }
-    
-    func didTapped() {
-        
     }
 }
