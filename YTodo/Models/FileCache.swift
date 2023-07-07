@@ -15,34 +15,8 @@ enum FileCacheErrors: Error {
 
 // MARK: - File Cache class
 final class FileCache {
-    private(set) var todoItems = [TodoItem]()
     
-    func add(_ item: TodoItem) {
-        if !todoItems.contains(where: { $0.id == item.id }) {
-            todoItems.append(item)
-        } else {
-            delete(withId: item.id)
-            add(item)
-        }
-    }
-    
-    func update(at id: String, to item: TodoItem) {
-        let itemIndex = todoItems.firstIndex(where: {$0.id == id})
-        if let itemIndex = itemIndex {
-            todoItems[itemIndex].text = item.text
-            todoItems[itemIndex].deadline = item.deadline
-            todoItems[itemIndex].dateOfCreation = item.dateOfCreation
-            todoItems[itemIndex].isCompleted = item.isCompleted
-            todoItems[itemIndex].priority = item.priority
-            todoItems[itemIndex].dateOfChange = .now
-        }
-    }
-    
-    func delete(withId id: String) {
-        todoItems.removeAll(where: { $0.id == id})
-    }
-    
-    func saveJSON(to file: String) throws {
+    static func saveJSON(todoItems: [TodoItem], to file: String) throws {
         guard let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             throw FileCacheErrors.noSuchFileOrDirectory
         }
@@ -52,7 +26,7 @@ final class FileCache {
         try data.write(to: path)
     }
     
-    func loadJSON(from file: String) throws {
+    static func loadJSON(from file: String) throws -> [TodoItem] {
         guard let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             throw FileCacheErrors.noSuchFileOrDirectory
         }
@@ -71,13 +45,13 @@ final class FileCache {
             throw FileCacheErrors.upparsableData
         }
         
-        todoItems = array.compactMap({TodoItem.parse(json: $0)})
+        return array.compactMap({TodoItem.parse(json: $0)})
     }
 }
 
 // MARK: - FileCache CSV extension
 extension FileCache {
-    func loadCSV(from file: String) throws {
+    static func loadCSV(from file: String) throws -> [TodoItem] {
         guard let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             throw FileCacheErrors.noSuchFileOrDirectory
         }
@@ -93,20 +67,22 @@ extension FileCache {
             throw FileCacheErrors.upparsableData
         }
         
-        todoItems = []
+        var todoItems: [TodoItem] = []
         for rowIndex in 1 ..< rows.count {
             if let todoItem = TodoItem.parse(csv: rows[rowIndex]) {
-                add(todoItem)
+                todoItems.append(todoItem)
             }
         }
+        return todoItems
     }
     
-    func saveCSV(to file: String) throws {
+    static func saveCSV(todoItems: [TodoItem], to file: String) throws {
         guard let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             throw FileCacheErrors.noSuchFileOrDirectory
         }
         
         let path = dir.appending(path: file)
+        print(path)
         var dataString = "id;text;priority;deadline;isCompleted;dateOfCreation;dateOfChange"
         for item in todoItems {
             dataString += "\n" + item.csv

@@ -10,8 +10,8 @@ import Foundation
 // MARK: - Priority enum
 enum Priority: String {
     case low
-    case normal
-    case high
+    case normal = "basic"
+    case high = "important"
 }
 
 // MARK: - TodoItem struct
@@ -35,6 +35,19 @@ struct TodoItem {
         self.isCompleted = isCompleted
         self.dateOfCreation = dateOfCreation
         self.dateOfChange = dateOfChange
+    }
+    
+    init(_ item: TodoItemForResponse) {
+        id = item.id
+        text = item.text
+        priority = Priority(rawValue: item.priority) ?? .normal
+        isCompleted = item.isCompleted
+        dateOfCreation = Date(timeIntervalSince1970: Double(item.dateOfCreation))
+        dateOfChange = Date(timeIntervalSince1970: Double(item.dateOfChange))
+        
+        if let deadline = item.deadline {
+            self.deadline = Date(timeIntervalSince1970: Double(deadline))
+        }
     }
 }
 

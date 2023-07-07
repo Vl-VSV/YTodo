@@ -12,7 +12,7 @@ class TodoViewController: UIViewController {
     
     // MARK: - Properties
     private var scrollVeiwBottomConstraint: NSLayoutConstraint?
-    var fileCache: FileCache
+    var saveService: SaveService
     var todo: TodoItem
     weak var delegate: UpdateTable?
     
@@ -76,8 +76,8 @@ class TodoViewController: UIViewController {
     }
     
     // MARK: - Init
-    init(fileCache: FileCache, todo: TodoItem = TodoItem(text: "", priority: .normal, isCompleted: false, dateOfCreation: .now)) {
-        self.fileCache = fileCache
+    init(saveService: SaveService, todo: TodoItem = TodoItem(text: "", priority: .normal, isCompleted: false, dateOfCreation: .now)) {
+        self.saveService = saveService
         self.todo = todo
         super.init(nibName: nil, bundle: nil)
     }
@@ -374,20 +374,9 @@ class TodoViewController: UIViewController {
             present(alert, animated: true, completion: nil)
             return
         }
-        if fileCache.todoItems.contains(where: {$0.id == todo.id}) {
-            fileCache.update(at: todo.id, to: todo)
-        } else {
-            fileCache.add(todo)
-        }
-        DispatchQueue.main.async {
-            do {
-                try self.fileCache.saveCSV(to: "SavedItems.csv")
-                self.delegate?.updateData()
-            } catch {
-                alert.message = error.localizedDescription
-                self.present(alert, animated: true, completion: nil)
-            }
-        }
+        
+        saveService.add(todo)
+        
         dismiss(animated: true)
     }
     
@@ -396,15 +385,7 @@ class TodoViewController: UIViewController {
     }
     
     @objc private func deleteButtonTapped() {
-        fileCache.delete(withId: todo.id)
-        DispatchQueue.main.async {
-            do {
-                try self.fileCache.saveCSV(to: "SavedItems.csv")
-            } catch {
-                print(error)
-            }
-        }
-        delegate?.updateData()
+        saveService.delete(withId: todo.id)
         dismiss(animated: true)
     }
     
