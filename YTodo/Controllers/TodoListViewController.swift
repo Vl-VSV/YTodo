@@ -129,7 +129,6 @@ class TodoListViewController: UIViewController {
         var selectedTodo = hideCompletedItems ? saveService.todoItems.filter { !$0.isCompleted }[indexPath.row] : saveService.todoItems[indexPath.row]
         selectedTodo.isCompleted.toggle()
         saveService.update(selectedTodo)
-        UIView.transition(with: tableView, duration: 0.5, options: .transitionCrossDissolve, animations: {self.tableView.reloadData()}, completion: nil)
     }
     
     @objc private func goToDetailView(at indexPath: IndexPath) {
@@ -144,7 +143,6 @@ class TodoListViewController: UIViewController {
     @objc private func deleteItem(at indexPath: IndexPath) {
         let selectedTodo = hideCompletedItems ? saveService.todoItems.filter { !$0.isCompleted }[indexPath.row] : saveService.todoItems[indexPath.row]
         saveService.delete(withId: selectedTodo.id)
-        UIView.transition(with: tableView, duration: 0.5, options: .transitionCrossDissolve, animations: {self.tableView.reloadData()}, completion: nil)
     }
 }
 

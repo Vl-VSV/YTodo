@@ -218,8 +218,8 @@
             filePath = "YTodo/SaveService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
             landmarkName = "add(_:)"
             landmarkType = "7">
             <Locations>
@@ -253,6 +253,21 @@
                   endingLineNumber = "99"
                   offsetFromSymbolStart = "292">
                </Location>
+               <Location
+                  uuid = "DBCA8CD2-3DF7-4A71-968A-B51425CF57F0 - bb61737ba463cb8c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "YTodo.SaveService.add(YTodo.TodoItem) -&gt; ()"
+                  moduleName = "YTodo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladv/Yandex/YTodo/YTodo/SaveService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "155"
+                  endingLineNumber = "155"
+                  offsetFromSymbolStart = "608">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -266,8 +281,8 @@
             filePath = "YTodo/SaveService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
             landmarkName = "update(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -282,8 +297,8 @@
             filePath = "YTodo/SaveService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
             landmarkName = "update(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -298,8 +313,8 @@
             filePath = "YTodo/SaveService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
             landmarkName = "loadData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -314,8 +329,8 @@
             filePath = "YTodo/SaveService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
             landmarkName = "loadData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -330,8 +345,8 @@
             filePath = "YTodo/SaveService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
             landmarkName = "loadData()"
             landmarkType = "7">
             <Actions>
@@ -354,8 +369,8 @@
             filePath = "YTodo/Controllers/TodoListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "298"
-            endingLineNumber = "298"
+            startingLineNumber = "296"
+            endingLineNumber = "296"
             landmarkName = "startLoading()"
             landmarkType = "7">
             <Locations>
@@ -402,8 +417,8 @@
             filePath = "YTodo/SaveService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "181"
-            endingLineNumber = "181"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
             landmarkName = "synchronization()"
             landmarkType = "7">
             <Locations>
@@ -437,6 +452,21 @@
                   endingLineNumber = "187"
                   offsetFromSymbolStart = "32">
                </Location>
+               <Location
+                  uuid = "60D0AD50-CD7E-45C6-BE09-4FEFC97727A1 - 58a59ae632fe0afd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "YTodo.SaveService.synchronization() -&gt; ()"
+                  moduleName = "YTodo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladv/Yandex/YTodo/YTodo/SaveService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "191"
+                  endingLineNumber = "191"
+                  offsetFromSymbolStart = "60">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -450,8 +480,8 @@
             filePath = "YTodo/SaveService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
             landmarkName = "loadData()"
             landmarkType = "7">
             <Locations>
@@ -498,8 +528,8 @@
             filePath = "YTodo/SaveService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
             landmarkName = "loadData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -514,8 +544,8 @@
             filePath = "YTodo/SaveService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
             landmarkName = "loadData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -562,8 +592,8 @@
             filePath = "YTodo/SaveService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
             landmarkName = "loadData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -594,8 +624,8 @@
             filePath = "YTodo/SaveService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
             landmarkName = "loadData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -610,8 +640,8 @@
             filePath = "YTodo/SaveService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
             landmarkName = "loadData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -626,8 +656,8 @@
             filePath = "YTodo/SaveService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "loadData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -642,8 +672,8 @@
             filePath = "YTodo/SaveService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
             landmarkName = "loadData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -658,10 +688,87 @@
             filePath = "YTodo/SaveService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
             landmarkName = "add(_:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "6C3EB91F-833A-4683-8DFE-C38799DEBDB6 - bb61737ba463d44a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "YTodo.SaveService.add(YTodo.TodoItem) -&gt; ()"
+                  moduleName = "YTodo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladv/Yandex/YTodo/YTodo/SaveService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "149"
+                  endingLineNumber = "149"
+                  offsetFromSymbolStart = "360">
+               </Location>
+               <Location
+                  uuid = "6C3EB91F-833A-4683-8DFE-C38799DEBDB6 - bb61737ba463d4f1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "YTodo.SaveService.add(YTodo.TodoItem) -&gt; ()"
+                  moduleName = "YTodo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladv/Yandex/YTodo/YTodo/SaveService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "144"
+                  endingLineNumber = "144"
+                  offsetFromSymbolStart = "164">
+               </Location>
+               <Location
+                  uuid = "6C3EB91F-833A-4683-8DFE-C38799DEBDB6 - bb61737ba463d510"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "YTodo.SaveService.add(YTodo.TodoItem) -&gt; ()"
+                  moduleName = "YTodo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladv/Yandex/YTodo/YTodo/SaveService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "143"
+                  endingLineNumber = "143"
+                  offsetFromSymbolStart = "360">
+               </Location>
+               <Location
+                  uuid = "6C3EB91F-833A-4683-8DFE-C38799DEBDB6 - 4d534c2ea801ef6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (YTodo.TodoItem) -&gt; Swift.Bool in YTodo.SaveService.add(YTodo.TodoItem) -&gt; ()"
+                  moduleName = "YTodo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladv/Yandex/YTodo/YTodo/SaveService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "143"
+                  endingLineNumber = "143"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  uuid = "6C3EB91F-833A-4683-8DFE-C38799DEBDB6 - 4d534c2ea801fac"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (YTodo.TodoItem) -&gt; Swift.Bool in YTodo.SaveService.add(YTodo.TodoItem) -&gt; ()"
+                  moduleName = "YTodo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladv/Yandex/YTodo/YTodo/SaveService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "149"
+                  endingLineNumber = "149"
+                  offsetFromSymbolStart = "40">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -674,8 +781,8 @@
             filePath = "YTodo/SaveService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
             landmarkName = "add(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -690,8 +797,8 @@
             filePath = "YTodo/SaveService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
             landmarkName = "add(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -706,10 +813,72 @@
             filePath = "YTodo/SaveService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
             landmarkName = "add(_:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "5D478244-4F9A-4BFC-8093-3FB6E34244CF - bb61737ba463cb23"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "YTodo.SaveService.add(YTodo.TodoItem) -&gt; ()"
+                  moduleName = "YTodo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladv/Yandex/YTodo/YTodo/SaveService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "158"
+                  endingLineNumber = "158"
+                  offsetFromSymbolStart = "1436">
+               </Location>
+               <Location
+                  uuid = "5D478244-4F9A-4BFC-8093-3FB6E34244CF - bb61737ba463cbce"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "YTodo.SaveService.add(YTodo.TodoItem) -&gt; ()"
+                  moduleName = "YTodo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladv/Yandex/YTodo/YTodo/SaveService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "153"
+                  endingLineNumber = "153"
+                  offsetFromSymbolStart = "1076">
+               </Location>
+               <Location
+                  uuid = "5D478244-4F9A-4BFC-8093-3FB6E34244CF - bb61737ba463cbce"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "YTodo.SaveService.add(YTodo.TodoItem) -&gt; ()"
+                  moduleName = "YTodo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladv/Yandex/YTodo/YTodo/SaveService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "153"
+                  endingLineNumber = "153"
+                  offsetFromSymbolStart = "1440">
+               </Location>
+               <Location
+                  uuid = "5D478244-4F9A-4BFC-8093-3FB6E34244CF - bb61737ba463c9d9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "YTodo.SaveService.add(YTodo.TodoItem) -&gt; ()"
+                  moduleName = "YTodo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladv/Yandex/YTodo/YTodo/SaveService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "168"
+                  endingLineNumber = "168"
+                  offsetFromSymbolStart = "1440">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -722,8 +891,8 @@
             filePath = "YTodo/SaveService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
             landmarkName = "update(_:)"
             landmarkType = "7">
             <Locations>
@@ -770,8 +939,8 @@
             filePath = "YTodo/SaveService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
             landmarkName = "update(_:)"
             landmarkType = "7">
             <Locations>
@@ -818,8 +987,8 @@
             filePath = "YTodo/SaveService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "185"
-            endingLineNumber = "185"
+            startingLineNumber = "212"
+            endingLineNumber = "212"
             landmarkName = "synchronization()"
             landmarkType = "7">
             <Actions>
@@ -842,8 +1011,8 @@
             filePath = "YTodo/SaveService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
+            startingLineNumber = "211"
+            endingLineNumber = "211"
             landmarkName = "synchronization()"
             landmarkType = "7">
          </BreakpointContent>
@@ -858,8 +1027,8 @@
             filePath = "YTodo/SaveService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
             landmarkName = "update(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -877,6 +1046,453 @@
             startingLineNumber = "101"
             endingLineNumber = "101"
             landmarkName = "showLoadingView()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "770409BC-7E6E-4C20-B182-71BA8727BA2C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "YTodo/SaveService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
+            landmarkName = "add(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "770409BC-7E6E-4C20-B182-71BA8727BA2C - bb61737ba463d42b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "YTodo.SaveService.add(YTodo.TodoItem) -&gt; ()"
+                  moduleName = "YTodo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladv/Yandex/YTodo/YTodo/SaveService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "150"
+                  endingLineNumber = "150"
+                  offsetFromSymbolStart = "424">
+               </Location>
+               <Location
+                  uuid = "770409BC-7E6E-4C20-B182-71BA8727BA2C - bb61737ba463cb23"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "YTodo.SaveService.add(YTodo.TodoItem) -&gt; ()"
+                  moduleName = "YTodo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladv/Yandex/YTodo/YTodo/SaveService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "158"
+                  endingLineNumber = "158"
+                  offsetFromSymbolStart = "756">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C73B408A-FE05-4944-A9BD-164B5A8EB169"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "YTodo/SaveService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "209"
+            endingLineNumber = "209"
+            landmarkName = "synchronization()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "C73B408A-FE05-4944-A9BD-164B5A8EB169 - 4d735cc7d7c3e30d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;(Swift.Array&lt;YTodo.TodoItem&gt;, Swift.Int32), Swift.Error&gt;) -&gt; () in YTodo.SaveService.synchronization() -&gt; ()"
+                  moduleName = "YTodo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladv/Yandex/YTodo/YTodo/SaveService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "192"
+                  endingLineNumber = "192"
+                  offsetFromSymbolStart = "636">
+               </Location>
+               <Location
+                  uuid = "C73B408A-FE05-4944-A9BD-164B5A8EB169 - 4d735cc7d7c3e389"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;(Swift.Array&lt;YTodo.TodoItem&gt;, Swift.Int32), Swift.Error&gt;) -&gt; () in YTodo.SaveService.synchronization() -&gt; ()"
+                  moduleName = "YTodo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladv/Yandex/YTodo/YTodo/SaveService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "196"
+                  endingLineNumber = "196"
+                  offsetFromSymbolStart = "300">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "745C1C2A-2179-426E-A79C-AC9A7E1A6BDC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "YTodo/SaveService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "208"
+            endingLineNumber = "208"
+            landmarkName = "synchronization()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FDD2FA66-2354-47CF-A863-FE1C005E7210"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "YTodo/SaveService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "171"
+            endingLineNumber = "171"
+            landmarkName = "add(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9457B00A-C3E9-4758-8333-4A49F252B10D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "YTodo/SaveService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "SaveService"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "58636522-34A1-48E4-A47D-2054087B9E21"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "YTodo/SaveService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "201"
+            endingLineNumber = "201"
+            landmarkName = "synchronization()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "568939CE-3692-4250-9454-3FF8DB559823"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "YTodo/SaveService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
+            landmarkName = "add(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "747E62FA-B828-400B-8E91-5382311A0569"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "YTodo/SaveService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
+            landmarkName = "add(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "747E62FA-B828-400B-8E91-5382311A0569 - bb61737ba463cb23"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "YTodo.SaveService.add(YTodo.TodoItem) -&gt; ()"
+                  moduleName = "YTodo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladv/Yandex/YTodo/YTodo/SaveService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "158"
+                  endingLineNumber = "158"
+                  offsetFromSymbolStart = "756">
+               </Location>
+               <Location
+                  uuid = "747E62FA-B828-400B-8E91-5382311A0569 - 3e620e8a2dd50368"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in YTodo.SaveService.add(YTodo.TodoItem) -&gt; ()"
+                  moduleName = "YTodo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladv/Yandex/YTodo/YTodo/SaveService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "160"
+                  endingLineNumber = "160"
+                  offsetFromSymbolStart = "64">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5382730E-5FC3-4CAD-96F3-CA1AE09B634A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "YTodo/SaveService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
+            landmarkName = "add(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9E35B7EE-D1B5-42E4-9A86-F2CA470BB952"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "YTodo/Controllers/TodoListViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "291"
+            endingLineNumber = "291"
+            landmarkName = "updateData()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BB01A7A1-9E15-42B3-836D-C481D1A4A146"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "YTodo/Controllers/TodoListViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "91C36299-5A1B-4DC6-91AA-070CCB457D39"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "YTodo/SaveService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
+            landmarkName = "SaveService"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "ED176789-1C99-4D0B-877D-6CFA0BAA7C2C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "YTodo/SaveService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
+            landmarkName = "add(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BCBBD0CD-376C-40BE-B002-F6846738DDCC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "YTodo/Controllers/TodoListViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
+            landmarkName = "changeCompletion(at:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "BCBBD0CD-376C-40BE-B002-F6846738DDCC - 4cd03c7f30be4e77"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "YTodo.TodoListViewController.changeCompletion(at: Foundation.IndexPath) -&gt; ()"
+                  moduleName = "YTodo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladv/Yandex/YTodo/YTodo/Controllers/TodoListViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "131"
+                  endingLineNumber = "131"
+                  offsetFromSymbolStart = "612">
+               </Location>
+               <Location
+                  uuid = "BCBBD0CD-376C-40BE-B002-F6846738DDCC - 4cd03c7f30be4e77"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "YTodo.TodoListViewController.changeCompletion(at: Foundation.IndexPath) -&gt; ()"
+                  moduleName = "YTodo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladv/Yandex/YTodo/YTodo/Controllers/TodoListViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "131"
+                  endingLineNumber = "131"
+                  offsetFromSymbolStart = "604">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F03D8A90-CEC9-47A1-B9BE-094EB10548CB"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "YTodo/SaveService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
+            landmarkName = "update(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "F03D8A90-CEC9-47A1-B9BE-094EB10548CB - 3753fb5156d58e6c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "YTodo.SaveService.update(YTodo.TodoItem) -&gt; ()"
+                  moduleName = "YTodo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladv/Yandex/YTodo/YTodo/SaveService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "120"
+                  endingLineNumber = "120"
+                  offsetFromSymbolStart = "1508">
+               </Location>
+               <Location
+                  uuid = "F03D8A90-CEC9-47A1-B9BE-094EB10548CB - 6e7e33a76c16f0b9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in YTodo.SaveService.update(YTodo.TodoItem) -&gt; ()"
+                  moduleName = "YTodo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladv/Yandex/YTodo/YTodo/SaveService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "122"
+                  endingLineNumber = "122"
+                  offsetFromSymbolStart = "64">
+               </Location>
+               <Location
+                  uuid = "F03D8A90-CEC9-47A1-B9BE-094EB10548CB - 3753fb5156d58e4d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "YTodo.SaveService.update(YTodo.TodoItem) -&gt; ()"
+                  moduleName = "YTodo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladv/Yandex/YTodo/YTodo/SaveService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "119"
+                  endingLineNumber = "119"
+                  offsetFromSymbolStart = "1388">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1314865E-0899-4F0C-94D1-E68752209A3E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "YTodo/SaveService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
+            landmarkName = "synchronization()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "37280C94-CE29-486F-96B0-F08EA5EC75F3"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "YTodo/SaveService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "195"
+            endingLineNumber = "195"
+            landmarkName = "synchronization()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
