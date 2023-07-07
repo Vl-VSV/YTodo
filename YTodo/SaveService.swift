@@ -47,23 +47,25 @@ class SaveService {
         
         delegate?.startLoading()
         networkService.fetchTodoList { [weak self] result in
+            guard let self = self else { return }
+            
             DispatchQueue.main.async {
                 switch result {
                 case .success(let data):
                     print("Successful load to server")
-                    self?.todoItems = data.0
-                    self?.revision = data.1
-                    self?.delegate?.updateData()
-                    self?.delegate?.completeLoading()
+                    self.todoItems = data.0
+                    self.revision = data.1
+                    self.delegate?.updateData()
+                    self.delegate?.completeLoading()
                 
                 case .failure(let error):
                     print(error)
-                    self?.delegate?.completeLoading()
+                    self.delegate?.completeLoading()
                     
-                    self?.isDirty = true
+                    self.isDirty = true
                     do {
-                        self?.todoItems = try FileCache.loadCSV(from: Constants.fileName)
-                        self?.delegate?.updateData()
+                        self.todoItems = try FileCache.loadCSV(from: Constants.fileName)
+                        self.delegate?.updateData()
                     } catch {
                         print(error)
                     }
@@ -94,20 +96,22 @@ class SaveService {
         // MARK: - Dalete from server
         delegate?.startLoading()
         networkService.deleteTodoItem(with: id, lastKnownRevision: revision) { [weak self] result in
+            guard let self = self else { return }
+            
             DispatchQueue.main.async {
                 switch result {
                 case .success(let revision):
                     print("Successful delete to server")
-                    self?.revision = revision
-                    self?.delegate?.completeLoading()
-                    self?.retryNum = 0
+                    self.revision = revision
+                    self.delegate?.completeLoading()
+                    self.retryNum = 0
                     
                 case.failure(let error):
                     print(error)
-                    self?.delegate?.completeLoading()
-                    self?.isDirty = true
-                    self?.executeWithExponentialRetry {
-                        self?.delete(withId: id)
+                    self.delegate?.completeLoading()
+                    self.isDirty = true
+                    self.executeWithExponentialRetry {
+                        self.delete(withId: id)
                     }
                 }
             }
@@ -144,20 +148,22 @@ class SaveService {
         // MARK: - Update item to server
         delegate?.startLoading()
         networkService.updateTodoItem(updatingItem: item, lastKnownRevision: revision) { [weak self] result in
+            guard let self = self else { return }
+            
             DispatchQueue.main.async {
                 switch result {
                 case .success(let revision):
                     print("Successful update to server")
-                    self?.revision = revision
-                    self?.delegate?.completeLoading()
-                    self?.retryNum = 0
+                    self.revision = revision
+                    self.delegate?.completeLoading()
+                    self.retryNum = 0
                     
                 case .failure(let error):
                     print(error)
-                    self?.delegate?.completeLoading()
-                    self?.isDirty = true
-                    self?.executeWithExponentialRetry {
-                        self?.update(item)
+                    self.delegate?.completeLoading()
+                    self.isDirty = true
+                    self.executeWithExponentialRetry {
+                        self.update(item)
                     }
                 }
             }
@@ -189,20 +195,22 @@ class SaveService {
         // MARK: - Add item to server
         delegate?.startLoading()
         networkService.createTodoItem(item, lastKnownRevision: revision) { [weak self] result in
+            guard let self = self else { return }
+            
             DispatchQueue.main.async {
                 switch result {
                 case .success(let revision):
                     print("Successful adding to server")
-                    self?.revision = revision
-                    self?.delegate?.completeLoading()
-                    self?.retryNum = 0
+                    self.revision = revision
+                    self.delegate?.completeLoading()
+                    self.retryNum = 0
                     
                 case .failure(let error):
                     print(error)
-                    self?.delegate?.completeLoading()
-                    self?.isDirty = true
-                    self?.executeWithExponentialRetry {
-                        self?.add(item)
+                    self.delegate?.completeLoading()
+                    self.isDirty = true
+                    self.executeWithExponentialRetry {
+                        self.add(item)
                     }
                 }
             }
@@ -221,20 +229,22 @@ class SaveService {
         // MARK: - Sync with server
         delegate?.startLoading()
         networkService.updateTodoList(with: todoItems, lastKnownRevision: revision) { [weak self] result in
+            guard let self = self else { return }
+            
             switch result {
             case .success(let data):
                 print("Successful sync with server")
-                self?.isDirty = false
-                self?.todoItems = data.0
-                self?.revision = data.1
-                self?.delegate?.completeLoading()
-                self?.retryNum = 0
+                self.isDirty = false
+                self.todoItems = data.0
+                self.revision = data.1
+                self.delegate?.completeLoading()
+                self.retryNum = 0
                 
             case .failure(let error):
                 print(error)
-                self?.delegate?.completeLoading()
-                self?.executeWithExponentialRetry {
-                    self?.synchronization()
+                self.delegate?.completeLoading()
+                self.executeWithExponentialRetry {
+                    self.synchronization()
                 }
             }
         }
