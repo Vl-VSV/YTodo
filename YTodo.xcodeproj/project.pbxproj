@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A41DB65A2A5C0110008E61B7 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = A41DB6592A5C0110008E61B7 /* SQLite */; };
 		A439D4792A38E92D0098C35C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439D4782A38E92D0098C35C /* AppDelegate.swift */; };
 		A439D47B2A38E92D0098C35C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A439D47A2A38E92D0098C35C /* SceneDelegate.swift */; };
 		A439D4802A38E92D0098C35C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A439D47E2A38E92D0098C35C /* Main.storyboard */; };
@@ -78,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A41DB65A2A5C0110008E61B7 /* SQLite in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +105,15 @@
 			children = (
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		A41DB65B2A5C01CC008E61B7 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A48555802A51E92000509444 /* NetworkService.swift */,
+				A4CAD03F2A56A36E003FA9DE /* SaveService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		A439D46C2A38E92D0098C35C = {
@@ -132,8 +143,7 @@
 				A439D4782A38E92D0098C35C /* AppDelegate.swift */,
 				A439D47A2A38E92D0098C35C /* SceneDelegate.swift */,
 				A46980FA2A433E490042F1CE /* ResourceConstants.swift */,
-				A48555802A51E92000509444 /* NetworkService.swift */,
-				A4CAD03F2A56A36E003FA9DE /* SaveService.swift */,
+				A41DB65B2A5C01CC008E61B7 /* Services */,
 				A4DF5DAF2A5832BA0071B68B /* Extensions */,
 				A4D8B26C2A40BF270086FD3F /* Controllers */,
 				A4D8B26B2A40BF0C0086FD3F /* Models */,
@@ -214,10 +224,10 @@
 			buildRules = (
 			);
 			dependencies = (
-				A40741572A51CDCA0017C249 /* PBXTargetDependency */,
 			);
 			name = YTodo;
 			packageProductDependencies = (
+				A41DB6592A5C0110008E61B7 /* SQLite */,
 			);
 			productName = YTodo;
 			productReference = A439D4752A38E92D0098C35C /* YTodo.app */;
@@ -292,7 +302,7 @@
 			);
 			mainGroup = A439D46C2A38E92D0098C35C;
 			packageReferences = (
-				A40741552A51CD960017C249 /* XCRemoteSwiftPackageReference "SwiftLint" */,
+				A41DB6582A5C0110008E61B7 /* XCRemoteSwiftPackageReference "SQLite" */,
 			);
 			productRefGroup = A439D4762A38E92D0098C35C /* Products */;
 			projectDirPath = "";
@@ -374,10 +384,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A40741572A51CDCA0017C249 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			productRef = A40741562A51CDCA0017C249 /* SwiftLintPlugin */;
-		};
 		A439D48D2A38E92F0098C35C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A439D4742A38E92D0098C35C /* YTodo */;
@@ -698,21 +704,21 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		A40741552A51CD960017C249 /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
+		A41DB6582A5C0110008E61B7 /* XCRemoteSwiftPackageReference "SQLite" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/SwiftLint";
+			repositoryURL = "https://github.com/stephencelis/SQLite.swift";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.52.3;
+				minimumVersion = 0.14.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		A40741562A51CDCA0017C249 /* SwiftLintPlugin */ = {
+		A41DB6592A5C0110008E61B7 /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A40741552A51CD960017C249 /* XCRemoteSwiftPackageReference "SwiftLint" */;
-			productName = "plugin:SwiftLintPlugin";
+			package = A41DB6582A5C0110008E61B7 /* XCRemoteSwiftPackageReference "SQLite" */;
+			productName = SQLite;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
