@@ -99,7 +99,7 @@ extension FileCache {
     /// Save Todo Items to SQLite database
     /// - Parameters:
     ///   - todoItems: Array of TodoItem, which need to save
-    ///   - file: Name of sqlite file
+    ///   - file: The name of the SQLite file
     /// - Throws: Errors that occur when saving data to the database
     static func saveSQLite(todoItems: [TodoItem], to file: String) throws {
         
@@ -146,27 +146,85 @@ extension FileCache {
         
         let path = dir.appending(path: file)
         
-        do {
-            let db = try Connection(path.absoluteString)
-            
-            let table = Table("todo_items")
-            
-            let id = Expression<String>("id")
-            let text = Expression<String>("text")
-            let priority = Expression<String>("priority")
-            let deadline = Expression<Date?>("deadline")
-            let isCompleted = Expression<Bool>("isCompleted")
-            let dateOfCreation = Expression<Date>("dateOfCreation")
-            let dateOfChange = Expression<Date?>("dateOfChange")
-            
-            var todoItems: [TodoItem] = []
-            for item in try db.prepare(table) {
-                todoItems.append(TodoItem(id: item[id], text: item[text], priority: Priority(rawValue: item[priority]) ?? .normal, deadline: item[deadline], isCompleted: item[isCompleted], dateOfCreation: item[dateOfCreation], dateOfChange: item[dateOfChange]))
-            }
-            
-            return todoItems
-        } catch {
-            throw error
+        let db = try Connection(path.absoluteString)
+        
+        let table = Table("todo_items")
+        
+        let id = Expression<String>("id")
+        let text = Expression<String>("text")
+        let priority = Expression<String>("priority")
+        let deadline = Expression<Date?>("deadline")
+        let isCompleted = Expression<Bool>("isCompleted")
+        let dateOfCreation = Expression<Date>("dateOfCreation")
+        let dateOfChange = Expression<Date?>("dateOfChange")
+        
+        var todoItems: [TodoItem] = []
+        for item in try db.prepare(table) {
+            todoItems.append(TodoItem(id: item[id], text: item[text], priority: Priority(rawValue: item[priority]) ?? .normal, deadline: item[deadline], isCompleted: item[isCompleted], dateOfCreation: item[dateOfCreation], dateOfChange: item[dateOfChange]))
         }
+        
+        return todoItems
+    }
+    
+    /// Add a TodoItem to the SQLite database
+    /// - Parameters:
+    ///   - item: The TodoItem to be added
+    ///   - file: The name of the SQLite file
+    static func addSQLite(_ item: TodoItem, to file: String) throws {
+        let db = try Connection(file)
+        
+        let table = Table("todo_items")
+        
+        let id = Expression<String>("id")
+        let text = Expression<String>("text")
+        let priority = Expression<String>("priority")
+        let deadline = Expression<Date?>("deadline")
+        let isCompleted = Expression<Bool>("isCompleted")
+        let dateOfCreation = Expression<Date>("dateOfCreation")
+        let dateOfChange = Expression<Date?>("dateOfChange")
+        
+        let insert = table.insert(or: .replace, id <- item.id, text <- item.text, priority <- item.priority.rawValue, deadline <- item.deadline, isCompleted <- item.isCompleted, dateOfCreation <- item.dateOfCreation, dateOfChange <- item.dateOfChange)
+        
+        try db.run(insert)
+    }
+    
+    /// Update a TodoItem to the SQLite database
+    /// - Parameters:
+    ///   - item: The TodoItem to be updated
+    ///   - file: The name of the SQLite file
+    static func updateItemSQLite(_ item: TodoItem, to file: String) throws {
+        let db = try Connection(file)
+        
+        let table = Table("todo_items")
+        
+        let id = Expression<String>("id")
+        let text = Expression<String>("text")
+        let priority = Expression<String>("priority")
+        let deadline = Expression<Date?>("deadline")
+        let isCompleted = Expression<Bool>("isCompleted")
+        let dateOfCreation = Expression<Date>("dateOfCreation")
+        let dateOfChange = Expression<Date?>("dateOfChange")
+        
+        let itemForUpdate = table.filter(id == item.id)
+        
+        let update = itemForUpdate.update(text <- item.text, priority <- item.priority.rawValue, deadline <- item.deadline, isCompleted <- item.isCompleted, dateOfCreation <- item.dateOfCreation, dateOfChange <- .now)
+        
+        try db.run(update)
+    }
+    
+    /// Delete a TodoItem to the SQLite database
+    /// - Parameters:
+    ///   - item: The TodoItem to be deleted
+    ///   - file: The name of the SQLite file
+    static func deleteItemSQLite(_ item: TodoItem, to file: String) throws {
+        let db = try Connection(file)
+        
+        let table = Table("todo_items")
+        
+        let id = Expression<String>("id")
+        
+        let itemForDelete = table.filter(id == item.id)
+        
+        try db.run(itemForDelete.delete())
     }
 }
