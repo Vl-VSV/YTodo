@@ -12,6 +12,7 @@ class SaveService {
         static let lastKnownRevision = "LastKnownRevision"
         static let isDirty = "isDirty"
         static let fileName = "SavedItems.csv"
+        static let SQLiteFileName = "SavedItems.sqlite3"
         
         static let minDelay: Double = 2000
         static let maxDelay: Double = 120000
@@ -57,14 +58,18 @@ class SaveService {
                     self.revision = data.1
                     self.delegate?.updateData()
                     self.delegate?.completeLoading()
-                
+                    do {
+                        try FileCache.saveSQLite(todoItems: self.todoItems, to: Constants.SQLiteFileName)
+                    } catch {
+                        print(error)
+                    }
                 case .failure(let error):
                     print(error)
                     self.delegate?.completeLoading()
                     
                     self.isDirty = true
                     do {
-                        self.todoItems = try FileCache.loadCSV(from: Constants.fileName)
+                        self.todoItems = try FileCache.loadSQLite(from: Constants.SQLiteFileName)
                         self.delegate?.updateData()
                     } catch {
                         print(error)
@@ -83,7 +88,7 @@ class SaveService {
         
         // MARK: - Save to local storage
             do {
-                try FileCache.saveCSV(todoItems: self.todoItems, to: Constants.fileName)
+                try FileCache.deleteItemSQLite(id, to: Constants.SQLiteFileName)
             } catch {
                 print(error)
             }
@@ -101,7 +106,7 @@ class SaveService {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let revision):
-                    print("Successful delete to server")
+                    print("Successful delete from server")
                     self.revision = revision
                     self.delegate?.completeLoading()
                     self.retryNum = 0
@@ -135,7 +140,7 @@ class SaveService {
         
         // MARK: - Save to local storage
             do {
-                try FileCache.saveCSV(todoItems: self.todoItems, to: Constants.fileName)
+                try FileCache.updateItemSQLite(todoItems[itemIndex], to: Constants.SQLiteFileName)
             } catch {
                 print(error)
             }
@@ -182,7 +187,7 @@ class SaveService {
         
         // MARK: - Save to local storage
         do {
-            try FileCache.saveCSV(todoItems: self.todoItems, to: Constants.fileName)
+            try FileCache.addSQLite(item, to: Constants.SQLiteFileName)
         } catch {
             print(error)
         }
@@ -221,7 +226,7 @@ class SaveService {
     private func synchronization() {
         // MARK: - Load local data
         do {
-            todoItems = try FileCache.loadCSV(from: Constants.fileName)
+            todoItems = try FileCache.loadSQLite(from: Constants.SQLiteFileName)
         } catch {
             print(error)
         }

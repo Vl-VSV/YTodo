@@ -102,8 +102,13 @@ extension FileCache {
     ///   - file: The name of the SQLite file
     /// - Throws: Errors that occur when saving data to the database
     static func saveSQLite(todoItems: [TodoItem], to file: String) throws {
+        guard let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            throw FileCacheErrors.noSuchFileOrDirectory
+        }
         
-        let db = try Connection(file)
+        let path = dir.appending(path: file)
+        print(path)
+        let db = try Connection(path.absoluteString)
         
         let table = Table("todo_items")
         
@@ -171,8 +176,14 @@ extension FileCache {
     ///   - item: The TodoItem to be added
     ///   - file: The name of the SQLite file
     static func addSQLite(_ item: TodoItem, to file: String) throws {
-        let db = try Connection(file)
+        guard let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            throw FileCacheErrors.noSuchFileOrDirectory
+        }
         
+        let path = dir.appending(path: file)
+        
+        let db = try Connection(path.absoluteString)
+        print(path)
         let table = Table("todo_items")
         
         let id = Expression<String>("id")
@@ -193,7 +204,13 @@ extension FileCache {
     ///   - item: The TodoItem to be updated
     ///   - file: The name of the SQLite file
     static func updateItemSQLite(_ item: TodoItem, to file: String) throws {
-        let db = try Connection(file)
+        guard let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            throw FileCacheErrors.noSuchFileOrDirectory
+        }
+        
+        let path = dir.appending(path: file)
+        
+        let db = try Connection(path.absoluteString)
         
         let table = Table("todo_items")
         
@@ -216,14 +233,20 @@ extension FileCache {
     /// - Parameters:
     ///   - item: The TodoItem to be deleted
     ///   - file: The name of the SQLite file
-    static func deleteItemSQLite(_ item: TodoItem, to file: String) throws {
-        let db = try Connection(file)
+    static func deleteItemSQLite(_ itemId: String, to file: String) throws {
+        guard let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            throw FileCacheErrors.noSuchFileOrDirectory
+        }
+        
+        let path = dir.appending(path: file)
+        
+        let db = try Connection(path.absoluteString)
         
         let table = Table("todo_items")
         
         let id = Expression<String>("id")
         
-        let itemForDelete = table.filter(id == item.id)
+        let itemForDelete = table.filter(id == itemId)
         
         try db.run(itemForDelete.delete())
     }
