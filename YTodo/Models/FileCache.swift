@@ -7,6 +7,7 @@
 
 import Foundation
 import SQLite
+import CoreData
 
 // MARK: - File Cache Errors enum
 enum FileCacheErrors: Error {
@@ -94,6 +95,7 @@ extension FileCache {
     }
 }
 
+// MARK: - SQLite extension
 extension FileCache {
     
     /// Save Todo Items to SQLite database
@@ -249,5 +251,121 @@ extension FileCache {
         let itemForDelete = table.filter(id == itemId)
         
         try db.run(itemForDelete.delete())
+    }
+}
+
+// MARK: - Core Data extension
+extension FileCache {
+    static private func convert(_ todoItem: TodoItem, to todoItemCD: TodoItemCD) {
+        todoItemCD.id = todoItem.id
+        todoItemCD.text = todoItem.text
+        todoItemCD.priority = todoItem.priority.rawValue
+        todoItemCD.isCompleted = todoItem.isCompleted
+        todoItemCD.dateOfCreation = Double(todoItem.dateOfCreation.timeIntervalSince1970)
+        
+        if let deadline = todoItem.deadline {
+            todoItemCD.deadline = Double(deadline.timeIntervalSince1970)
+        }
+        
+        if let dataOfChange = todoItem.dateOfChange {
+            todoItemCD.dateOfChange = Double(dataOfChange.timeIntervalSince1970)
+        }
+    }
+    
+    static func save(_ items: [TodoItem]) {
+        let context = AppDelegate().persistentContainer.viewContext
+        
+        for item in items {
+            let todoItemToSave = TodoItemCD(context: context)
+            convert(item, to: todoItemToSave)
+        }
+        
+        do {
+            try context.save()
+        } catch {
+            fatalError("Failed to save context: \(error)")
+        }
+    }
+    
+    static func add(_ item: TodoItem) {
+        let context = AppDelegate().persistentContainer.viewContext
+        let todoItemToSave = TodoItemCD(context: context)
+        convert(item, to: todoItemToSave)
+        AppDelegate().saveContext()
+    }
+    
+    static func update(_ item: TodoItem) {
+        let context = AppDelegate().persistentContainer.viewContext
+        let fetchRequest: NSFetchRequest<TodoItemCD> = TodoItemCD.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %@", item.id)
+        
+        do {
+            let result = try context.fetch(fetchRequest)
+            
+            if let todoItemToUpdate = result.first {
+                convert(item, to: todoItemToUpdate)
+                
+                do {
+                    try context.save()
+                } catch {
+                    fatalError("Failed to save context: \(error)")
+                }
+            }
+        } catch {
+            fatalError("Failed to fetch todo item: \(item), \(error)")
+        }
+    }
+    
+    static func delete(_ item: TodoItem) {
+        let context = AppDelegate().persistentContainer.viewContext
+        
+        let fetchRequest: NSFetchRequest<TodoItemCD> = TodoItemCD.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %@", item.id)
+        
+        do {
+            let result = try context.fetch(fetchRequest)
+            
+            if let todoItemToDelete = result.first {
+                context.delete(todoItemToDelete)
+            }
+            
+            do {
+                try context.save()
+            } catch {
+                fatalError("Failed to save context: \(error)")
+            }
+            
+        } catch {
+            fatalError("Failed to fetch todo item: \(item), \(error)")
+        }
+    }
+    
+    static func load() -> [TodoItem] {
+        let context = AppDelegate().persistentContainer.viewContext
+        
+        let fetchRequest: NSFetchRequest<TodoItemCD> = TodoItemCD.fetchRequest()
+        
+        do {
+            let result = try context.fetch(fetchRequest)
+            
+            var todoItems: [TodoItem] = []
+            
+            for todoItemCD in result {
+                let todoItem = TodoItem(
+                    id: todoItemCD.id ?? "",
+                    text: todoItemCD.text ?? "",
+                    priority: Priority(rawValue: todoItemCD.priority ?? "") ?? .normal,
+                    deadline: Date(timeIntervalSince1970: todoItemCD.deadline),
+                    isCompleted: todoItemCD.isCompleted,
+                    dateOfCreation: Date(timeIntervalSince1970: todoItemCD.dateOfCreation),
+                    dateOfChange: Date(timeIntervalSince1970: todoItemCD.dateOfChange)
+                )
+                
+                todoItems.append(todoItem)
+            }
+            return todoItems
+        } catch {
+            fatalError("Failed to fetch todo items: \(error)")
+        }
     }
 }
