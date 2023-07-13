@@ -58,6 +58,7 @@ class SaveService {
                     self.revision = data.1
                     self.delegate?.updateData()
                     self.delegate?.completeLoading()
+//                    FileCache.save(self.todoItems) /* For Core Data */
                     do {
                         try FileCache.saveSQLite(todoItems: self.todoItems, to: Constants.SQLiteFileName)
                     } catch {
@@ -68,6 +69,8 @@ class SaveService {
                     self.delegate?.completeLoading()
                     
                     self.isDirty = true
+//                    self.todoItems = FileCache.load() /* For Core Data */
+//                    self.delegate?.updateData() /* For Core Data */
                     do {
                         self.todoItems = try FileCache.loadSQLite(from: Constants.SQLiteFileName)
                         self.delegate?.updateData()
@@ -87,6 +90,7 @@ class SaveService {
         delegate?.updateData()
         
         // MARK: - Save to local storage
+//        FileCache.delete(id) /* For Core Data */
             do {
                 try FileCache.deleteItemSQLite(id, to: Constants.SQLiteFileName)
             } catch {
@@ -139,6 +143,7 @@ class SaveService {
         delegate?.updateData()
         
         // MARK: - Save to local storage
+//        FileCache.update(todoItems[itemIndex]) /* For Core Data */
             do {
                 try FileCache.updateItemSQLite(todoItems[itemIndex], to: Constants.SQLiteFileName)
             } catch {
@@ -186,6 +191,7 @@ class SaveService {
         delegate?.updateData()
         
         // MARK: - Save to local storage
+//        FileCache.add(item) /* For Core Data */
         do {
             try FileCache.addSQLite(item, to: Constants.SQLiteFileName)
         } catch {
@@ -225,6 +231,7 @@ class SaveService {
     // MARK: - Sync
     private func synchronization() {
         // MARK: - Load local data
+//        todoItems = FileCache.load() /* For Core Data */
         do {
             todoItems = try FileCache.loadSQLite(from: Constants.SQLiteFileName)
         } catch {

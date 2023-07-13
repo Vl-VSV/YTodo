@@ -85,7 +85,7 @@ extension FileCache {
         }
         
         let path = dir.appending(path: file)
-        print(path)
+        
         var dataString = "id;text;priority;deadline;isCompleted;dateOfCreation;dateOfChange"
         for item in todoItems {
             dataString += "\n" + item.csv
@@ -109,7 +109,7 @@ extension FileCache {
         }
         
         let path = dir.appending(path: file)
-        print(path)
+        
         let db = try Connection(path.absoluteString)
         
         let table = Table("todo_items")
@@ -185,7 +185,7 @@ extension FileCache {
         let path = dir.appending(path: file)
         
         let db = try Connection(path.absoluteString)
-        print(path)
+        
         let table = Table("todo_items")
         
         let id = Expression<String>("id")
@@ -256,6 +256,10 @@ extension FileCache {
 
 // MARK: - Core Data extension
 extension FileCache {
+    /// Convert a **TodoItem** to **TodoItemCD**
+    /// - Parameters:
+    ///   - todoItem: Todo Item to be converted
+    ///   - todoItemCD: Core Data object to store the converted values
     static private func convert(_ todoItem: TodoItem, to todoItemCD: TodoItemCD) {
         todoItemCD.id = todoItem.id
         todoItemCD.text = todoItem.text
@@ -272,9 +276,23 @@ extension FileCache {
         }
     }
     
+    /// Save an array of **TodoItem** objects to Core Data
+    /// - Parameter items: An array of **TodoItem** objects to be saved
     static func save(_ items: [TodoItem]) {
         let context = AppDelegate().persistentContainer.viewContext
         
+        let fetchRequest: NSFetchRequest<TodoItemCD> = TodoItemCD.fetchRequest()
+        fetchRequest.returnsObjectsAsFaults = false
+        
+        do {
+            let result = try context.fetch(fetchRequest)
+            
+            for item in result {
+                context.delete(item)
+            }
+        } catch {
+            fatalError("Failed to fetch todo items: \(error)")
+        }
         for item in items {
             let todoItemToSave = TodoItemCD(context: context)
             convert(item, to: todoItemToSave)
@@ -287,13 +305,22 @@ extension FileCache {
         }
     }
     
+    /// Add a single **TodoItem** object to Core Data
+    /// - Parameter item: The **TodoItem** object to be saved
     static func add(_ item: TodoItem) {
         let context = AppDelegate().persistentContainer.viewContext
         let todoItemToSave = TodoItemCD(context: context)
         convert(item, to: todoItemToSave)
-        AppDelegate().saveContext()
+        do {
+            try context.save()
+        } catch {
+            fatalError("Failed to save context: \(error)")
+        }
+        
     }
     
+    /// Update an existing **TodoItem** object in Core Data
+    /// - Parameter item: The updated **TodoItem** object
     static func update(_ item: TodoItem) {
         let context = AppDelegate().persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<TodoItemCD> = TodoItemCD.fetchRequest()
@@ -316,11 +343,13 @@ extension FileCache {
         }
     }
     
-    static func delete(_ item: TodoItem) {
+    /// Delete a **TodoItem** object from Core Data
+    /// - Parameter id: The id of the **TodoItem** object to be deleted
+    static func delete(_ id: String) {
         let context = AppDelegate().persistentContainer.viewContext
         
         let fetchRequest: NSFetchRequest<TodoItemCD> = TodoItemCD.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "id == %@", item.id)
+        fetchRequest.predicate = NSPredicate(format: "id == %@", id)
         
         do {
             let result = try context.fetch(fetchRequest)
@@ -336,10 +365,12 @@ extension FileCache {
             }
             
         } catch {
-            fatalError("Failed to fetch todo item: \(item), \(error)")
+            fatalError("Failed to fetch todo item id: \(id), \(error)")
         }
     }
     
+    /// Load all **TodoItem** objects from Core Data
+    /// - Returns: An array of **TodoItem** objects loaded from Core Data
     static func load() -> [TodoItem] {
         let context = AppDelegate().persistentContainer.viewContext
         
@@ -355,10 +386,10 @@ extension FileCache {
                     id: todoItemCD.id ?? "",
                     text: todoItemCD.text ?? "",
                     priority: Priority(rawValue: todoItemCD.priority ?? "") ?? .normal,
-                    deadline: Date(timeIntervalSince1970: todoItemCD.deadline),
+                    deadline: todoItemCD.deadline != -1 ? Date(timeIntervalSince1970: todoItemCD.deadline) : nil,
                     isCompleted: todoItemCD.isCompleted,
                     dateOfCreation: Date(timeIntervalSince1970: todoItemCD.dateOfCreation),
-                    dateOfChange: Date(timeIntervalSince1970: todoItemCD.dateOfChange)
+                    dateOfChange: todoItemCD.deadline != -1 ? Date(timeIntervalSince1970: todoItemCD.dateOfChange) : nil
                 )
                 
                 todoItems.append(todoItem)
