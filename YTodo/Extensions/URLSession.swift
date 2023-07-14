@@ -9,7 +9,7 @@ import Foundation
 
 extension URLSession {
     func dataTask(for urlRequest: URLRequest) async throws -> (Data, URLResponse) {
-        return try await withUnsafeThrowingContinuation{ continuation in
+        return try await withUnsafeThrowingContinuation { continuation in
             let task = self.dataTask(with: urlRequest) { data, response, error in
                 if let error = error {
                     continuation.resume(throwing: error)
