@@ -24,6 +24,10 @@
 		A4525DB82A4998F60085770C /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4525DB72A4998F60085770C /* TodoListViewController.swift */; };
 		A46980FB2A433E490042F1CE /* ResourceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46980FA2A433E490042F1CE /* ResourceConstants.swift */; };
 		A48555812A51E92000509444 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A48555802A51E92000509444 /* NetworkService.swift */; };
+		A4AA44112A63F278007F6F32 /* YTodoSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AA44102A63F278007F6F32 /* YTodoSwiftUIApp.swift */; };
+		A4AA44132A63F278007F6F32 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AA44122A63F278007F6F32 /* ContentView.swift */; };
+		A4AA44152A63F278007F6F32 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4AA44142A63F278007F6F32 /* Assets.xcassets */; };
+		A4AA44182A63F278007F6F32 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4AA44172A63F278007F6F32 /* Preview Assets.xcassets */; };
 		A4CAD0402A56A36E003FA9DE /* SaveService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CAD03F2A56A36E003FA9DE /* SaveService.swift */; };
 		A4CB89B42A5E8C3600364481 /* TodoItemDM.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A4CB89B22A5E8C3600364481 /* TodoItemDM.xcdatamodeld */; };
 		A4D4F8422A5409BB00C57C95 /* TodoItemForResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D4F8412A5409BB00C57C95 /* TodoItemForResponse.swift */; };
@@ -69,6 +73,11 @@
 		A4525DB72A4998F60085770C /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
 		A46980FA2A433E490042F1CE /* ResourceConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceConstants.swift; sourceTree = "<group>"; };
 		A48555802A51E92000509444 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		A4AA440E2A63F278007F6F32 /* YTodoSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YTodoSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4AA44102A63F278007F6F32 /* YTodoSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTodoSwiftUIApp.swift; sourceTree = "<group>"; };
+		A4AA44122A63F278007F6F32 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A4AA44142A63F278007F6F32 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A4AA44172A63F278007F6F32 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A4CAD03F2A56A36E003FA9DE /* SaveService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveService.swift; sourceTree = "<group>"; };
 		A4CB89B32A5E8C3600364481 /* TodoItemDM.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TodoItemDM.xcdatamodel; sourceTree = "<group>"; };
 		A4D4F8412A5409BB00C57C95 /* TodoItemForResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItemForResponse.swift; sourceTree = "<group>"; };
@@ -93,6 +102,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A439D4922A38E92F0098C35C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A4AA440B2A63F278007F6F32 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -124,6 +140,7 @@
 				A439D4772A38E92D0098C35C /* YTodo */,
 				A439D48E2A38E92F0098C35C /* YTodoTests */,
 				A439D4982A38E92F0098C35C /* YTodoUITests */,
+				A4AA440F2A63F278007F6F32 /* YTodoSwiftUI */,
 				A439D4762A38E92D0098C35C /* Products */,
 				53A88DDAA2A1B738327E1431 /* Pods */,
 			);
@@ -135,6 +152,7 @@
 				A439D4752A38E92D0098C35C /* YTodo.app */,
 				A439D48B2A38E92F0098C35C /* YTodoTests.xctest */,
 				A439D4952A38E92F0098C35C /* YTodoUITests.xctest */,
+				A4AA440E2A63F278007F6F32 /* YTodoSwiftUI.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -174,6 +192,25 @@
 				A439D49B2A38E92F0098C35C /* YTodoUITestsLaunchTests.swift */,
 			);
 			path = YTodoUITests;
+			sourceTree = "<group>";
+		};
+		A4AA440F2A63F278007F6F32 /* YTodoSwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				A4AA44102A63F278007F6F32 /* YTodoSwiftUIApp.swift */,
+				A4AA44122A63F278007F6F32 /* ContentView.swift */,
+				A4AA44142A63F278007F6F32 /* Assets.xcassets */,
+				A4AA44162A63F278007F6F32 /* Preview Content */,
+			);
+			path = YTodoSwiftUI;
+			sourceTree = "<group>";
+		};
+		A4AA44162A63F278007F6F32 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				A4AA44172A63F278007F6F32 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		A4D8B26A2A40BF010086FD3F /* Views */ = {
@@ -272,6 +309,23 @@
 			productReference = A439D4952A38E92F0098C35C /* YTodoUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		A4AA440D2A63F278007F6F32 /* YTodoSwiftUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A4AA441B2A63F278007F6F32 /* Build configuration list for PBXNativeTarget "YTodoSwiftUI" */;
+			buildPhases = (
+				A4AA440A2A63F278007F6F32 /* Sources */,
+				A4AA440B2A63F278007F6F32 /* Frameworks */,
+				A4AA440C2A63F278007F6F32 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = YTodoSwiftUI;
+			productName = YTodoSwiftUI;
+			productReference = A4AA440E2A63F278007F6F32 /* YTodoSwiftUI.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -292,6 +346,9 @@
 					A439D4942A38E92F0098C35C = {
 						CreatedOnToolsVersion = 14.3.1;
 						TestTargetID = A439D4742A38E92D0098C35C;
+					};
+					A4AA440D2A63F278007F6F32 = {
+						CreatedOnToolsVersion = 14.3.1;
 					};
 				};
 			};
@@ -314,6 +371,7 @@
 				A439D4742A38E92D0098C35C /* YTodo */,
 				A439D48A2A38E92F0098C35C /* YTodoTests */,
 				A439D4942A38E92F0098C35C /* YTodoUITests */,
+				A4AA440D2A63F278007F6F32 /* YTodoSwiftUI */,
 			);
 		};
 /* End PBXProject section */
@@ -340,6 +398,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A4AA440C2A63F278007F6F32 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4AA44182A63F278007F6F32 /* Preview Assets.xcassets in Resources */,
+				A4AA44152A63F278007F6F32 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,6 +449,15 @@
 			files = (
 				A439D49C2A38E92F0098C35C /* YTodoUITestsLaunchTests.swift in Sources */,
 				A439D49A2A38E92F0098C35C /* YTodoUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A4AA440A2A63F278007F6F32 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4AA44132A63F278007F6F32 /* ContentView.swift in Sources */,
+				A4AA44112A63F278007F6F32 /* YTodoSwiftUIApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -666,6 +742,66 @@
 			};
 			name = Release;
 		};
+		A4AA44192A63F278007F6F32 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"YTodoSwiftUI/Preview Content\"";
+				DEVELOPMENT_TEAM = UV4BPKP674;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vsv.YTodoSwiftUI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A4AA441A2A63F278007F6F32 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"YTodoSwiftUI/Preview Content\"";
+				DEVELOPMENT_TEAM = UV4BPKP674;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vsv.YTodoSwiftUI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -701,6 +837,15 @@
 			buildConfigurations = (
 				A439D4A62A38E92F0098C35C /* Debug */,
 				A439D4A72A38E92F0098C35C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A4AA441B2A63F278007F6F32 /* Build configuration list for PBXNativeTarget "YTodoSwiftUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A4AA44192A63F278007F6F32 /* Debug */,
+				A4AA441A2A63F278007F6F32 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
