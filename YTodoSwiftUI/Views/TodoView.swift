@@ -11,18 +11,13 @@ struct TodoView: View {
     //MARK: - Properties
     @Environment(\.dismiss) var dismiss
     
+    let item: TodoItem?
+    
     @State private var todoText: String = "Что надо сделать?"
     @State private var priorityIndex: Int = 1
     @State private var isDeadlineEnabled: Bool = false
     @State private var isShowDatePicker: Bool = false
     @State private var selectedDate: Date = .now + 72000
-    
-    init(item: TodoItem? = nil) {
-        self.todoText = item?.text ?? "Что надо сделать?"
-        self.priorityIndex = item?.priority == .high ? 2 : (item?.priority == .low ? 0 : 1)
-        self.isDeadlineEnabled = item?.deadline != nil ? true : false
-        self.selectedDate = item?.deadline ?? .now + 72000
-    }
     
     //MARK: - Body
     var body: some View {
@@ -33,7 +28,7 @@ struct TodoView: View {
                     .padding()
                     .background(RoundedRectangle(cornerRadius: 16).fill(ColorPalette.backSecondary))
                     .padding(.top)
-                    .foregroundColor(ColorPalette.tertiary)
+                    .foregroundColor(todoText == "Что надо сделать?" ? ColorPalette.tertiary : .primary)
                 
                 VStack(spacing: 16) {
                     HStack {
@@ -42,11 +37,11 @@ struct TodoView: View {
                         Spacer()
                         
                         Picker("", selection: $priorityIndex) {
-                            Image(ImageAssets.priorityLow)
+                            Image(uiImage: UIImage(named: "PriorityLow")!)
                                 .tag(0)
                             Text("нет").bold()
                                 .tag(1)
-                            Image(ImageAssets.priorityHigh)
+                            Image(uiImage: UIImage(named: "PriorityHigh")!)
                                 .tag(2)
                         }
                         .frame(width: 150, height: 36)
@@ -109,6 +104,7 @@ struct TodoView: View {
             .background(ColorPalette.backPrimary)
             
             .navigationTitle("Дело")
+            .navigationBarBackButtonHidden(true)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -126,12 +122,21 @@ struct TodoView: View {
                 }
             } //: TOOLBAR
         } //: NAVSTACK
+        .onAppear {
+            if let item {
+                todoText = item.text
+                priorityIndex = item.priority == .high ? 2 : (item.priority == .low ? 0 : 1)
+                isDeadlineEnabled = item.deadline != nil ? true : false
+                selectedDate = item.deadline ?? .now + 72000
+            }
+            
+        }
     }
 }
 
 // MARK: - Preview
 struct TodoView_Previews: PreviewProvider {
     static var previews: some View {
-        TodoView()
+        TodoView(item: nil)
     }
 }

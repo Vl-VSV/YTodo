@@ -10,26 +10,17 @@ import SwiftUI
 struct TodoItemCell: View {
     //MARK: - Properties
     var item: TodoItem
+    let onChangeCopletion: (TodoItem) -> Void
     
     //MARK: - Body
     var body: some View {
         HStack(spacing: 12) {
-            
-            Button {
-                
-            } label: {
-                if (item.isCompleted) {
-                    Image(ImageAssets.complete)
-                        .foregroundColor(ColorPalette.green)
-                } else if (item.priority == .high) {
-                    Image(ImageAssets.incompleteRed)
-                        .foregroundColor(ColorPalette.red)
-                } else {
-                    Image(ImageAssets.incomplete)
-                        .foregroundColor(ColorPalette.tertiary)
+            Image(item.isCompleted ? ImageAssets.complete : (item.priority == .high ? ImageAssets.incompleteRed : ImageAssets.incomplete))
+                .foregroundColor(item.isCompleted ? ColorPalette.green : (item.priority == .high) ? ColorPalette.red : ColorPalette.tertiary)
+                .onTapGesture {
+                    onChangeCopletion(item)
                 }
-            }
-           
+            
             VStack(alignment: .leading, spacing: 4) {
                 HStack(spacing: 2) {
                     if item.priority == .low {
@@ -37,8 +28,10 @@ struct TodoItemCell: View {
                     } else if item.priority == .high {
                         Image(ImageAssets.priorityHigh)
                     }
-
-                    Text(item.text).strikethrough(item.isCompleted, color: ColorPalette.tertiary)
+                    
+                    Text(item.text)
+                        .lineLimit(3)
+                        .strikethrough(item.isCompleted, color: ColorPalette.tertiary)
                         .foregroundColor(item.isCompleted ? ColorPalette.tertiary : Color.primary)
                 }
                 if let deadline = item.deadline {
@@ -57,16 +50,18 @@ struct TodoItemCell: View {
                 .foregroundColor(ColorPalette.gray)
                 .fontWeight(.semibold)
         }
-        .padding(.vertical, 12)
+        .padding(.vertical, 20)
     }
 }
 
 // MARK: - Preview
 struct TodoItemCell_Previews: PreviewProvider {
-    func test(item: TodoItem) {}
-    
+    static func test(_ item: TodoItem) {
+        print("Test changing completion of: \(item)")
+    }
+
     static var previews: some View {
-        TodoItemCell(item: todoItems[1])
+        TodoItemCell(item: TodoItem(text: "Smth to do", priority: .high, isCompleted: false, dateOfCreation: .now), onChangeCopletion: test)
             .previewLayout(.sizeThatFits)
     }
 }

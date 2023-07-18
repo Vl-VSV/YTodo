@@ -9,11 +9,30 @@ import SwiftUI
 
 struct TodoListView: View {
     //MARK: - Properties
-    
     @State private var isPresentingTodoView: Bool = false
     @State private var hideCompletedItems: Bool = false
-    private var selectedTodo: TodoItem?
-
+    @State private var selectedTodo: TodoItem?
+    
+    @State private var todoItems: [TodoItem] = [
+        TodoItem(text: "Go to the cinema", priority: .normal, isCompleted: false, dateOfCreation: .now),
+        TodoItem(text: "Complete the HW", priority: .high, isCompleted: true, dateOfCreation: .now),
+        TodoItem(text: "Buy the car", priority: .normal, deadline: .now + 72000, isCompleted: false, dateOfCreation: .now),
+        TodoItem(text: "Clean the room", priority: .low, isCompleted: false, dateOfCreation: .now),
+        TodoItem(text: "Make a report", priority: .high, deadline: .now + 72000, isCompleted: true, dateOfCreation: .now),
+        TodoItem(text: "Smth very long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long", priority: .high, deadline: .now + 72000, isCompleted: true, dateOfCreation: .now)
+    ]
+    
+    // MARK: - Function
+    func changeCompletion(_ item: TodoItem) {
+        if let index = todoItems.firstIndex(where: {$0.id == item.id}) {
+            changeCompletion(itemIndex: index)
+        }
+    }
+    
+    func changeCompletion(itemIndex: Int) {
+        todoItems[itemIndex].isCompleted.toggle()
+    }
+    
     //MARK: - Body
     var body: some View {
         NavigationStack {
@@ -21,21 +40,51 @@ struct TodoListView: View {
                 List {
                     Section(header: headerView) {
                         ForEach(hideCompletedItems ? todoItems.filter {!$0.isCompleted} : todoItems, id: \.id) { item in
-                            NavigationLink(destination: TodoView(item: item)) {
-                                TodoItemCell(item: item)
+                            VStack(spacing: 0) {
+                                TodoItemCell(item: item, onChangeCopletion: changeCompletion)
+                                    .contentShape(Rectangle())
+                                    .onTapGesture {
+                                        selectedTodo = item
+                                        isPresentingTodoView.toggle()
+                                    }
+                                    .swipeActions(edge: .leading) {
+                                        Button {
+                                            
+                                        } label: {
+                                            Image(systemName: "checkmark.circle")
+                                        }
+                                        .tint(.green)
+                                    }
+                                    .swipeActions(edge: .trailing) {
+                                        Button(role: .destructive) {
+                                            
+                                        } label: {
+                                            Image(systemName: "trash")
+                                        }
+                                    }
+                                Divider()
+                                    .padding(.leading, 38)
+                                    .padding(.trailing, -100)
                             }
+                            .listRowSeparator(.hidden)
+                            .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 12))
                         }
                         Button("Новое") {
-                            
+                            selectedTodo = nil
+                            isPresentingTodoView.toggle()
                         }
                         .foregroundColor(ColorPalette.tertiary)
                         .padding(.vertical, 12)
-                        .padding(.leading, 36)
+                        .padding(.leading, 32)
                     }
                 } //: LIST
+                .scrollContentBackground(.hidden)
+                .background(ColorPalette.backPrimary)
                 .listStyle(.insetGrouped)
                 
+                
                 Button {
+                    selectedTodo = nil
                     isPresentingTodoView = true
                 } label: {
                     Image(ImageAssets.newTodoButton)
@@ -44,6 +93,7 @@ struct TodoListView: View {
                         .shadow(color:ColorPalette.newTodoButtonShadow, radius: 8, x: 0, y: 8)
                 }
             } //: ZSTACK
+            
             .sheet(isPresented: $isPresentingTodoView) {
                 TodoView(item: selectedTodo)
             }
@@ -53,8 +103,6 @@ struct TodoListView: View {
         .onAppear {
             UINavigationBar.appearance().layoutMargins.left = 32
         }
-        .background(ColorPalette.backPrimary)
-        
     }
     
     // MARK: - View Properties

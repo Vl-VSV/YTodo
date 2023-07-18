@@ -7,15 +7,6 @@
 
 import Foundation
 
-// MARK: - Array of TodoItems
-var todoItems: [TodoItem] = [
-    TodoItem(text: "Go to the cinema", priority: .normal, isCompleted: false, dateOfCreation: .now),
-    TodoItem(text: "Complete the HW", priority: .high, isCompleted: false, dateOfCreation: .now),
-    TodoItem(text: "Buy the car", priority: .normal, deadline: .now + 72000, isCompleted: false, dateOfCreation: .now),
-    TodoItem(text: "Clean the room", priority: .low, isCompleted: true, dateOfCreation: .now),
-    TodoItem(text: "Make a report", priority: .high, deadline: .now + 72000, isCompleted: true, dateOfCreation: .now)
-]
-
 // MARK: - Priority enum
 enum Priority: String {
     case low
