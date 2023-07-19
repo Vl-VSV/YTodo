@@ -49,7 +49,7 @@ struct TodoListView: View {
                                     }
                                     .swipeActions(edge: .leading) {
                                         Button {
-                                            
+                                            changeCompletion(item)
                                         } label: {
                                             Image(systemName: "checkmark.circle")
                                         }
@@ -95,7 +95,7 @@ struct TodoListView: View {
             } //: ZSTACK
             
             .sheet(isPresented: $isPresentingTodoView) {
-                TodoView(item: selectedTodo)
+                TodoView(item: $selectedTodo)
             }
             .navigationTitle("Мои дела")
             .navigationBarTitleDisplayMode(.large)
