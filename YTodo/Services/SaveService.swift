@@ -7,7 +7,7 @@
 
 import Foundation
 
-class SaveService {
+class SaveService: ObservableObject {
     private enum Constants {
         static let lastKnownRevision = "LastKnownRevision"
         static let isDirty = "isDirty"
@@ -21,7 +21,8 @@ class SaveService {
     }
     
     // MARK: - Properties
-    private(set) var todoItems = [TodoItem]()
+    @Published private(set) var todoItems = [TodoItem]()
+    @Published private(set) var showActivityIndicator: Bool = false
     
     private var networkService: NetworkService = NetworkService()
     
@@ -47,6 +48,7 @@ class SaveService {
         }
         
         delegate?.startLoading()
+        showActivityIndicator = true
         networkService.fetchTodoList { [weak self] result in
             guard let self = self else { return }
             
@@ -58,6 +60,7 @@ class SaveService {
                     self.revision = data.1
                     self.delegate?.updateData()
                     self.delegate?.completeLoading()
+                    self.showActivityIndicator = false
 //                    FileCache.save(self.todoItems) /* For Core Data */
                     do {
                         try FileCache.saveSQLite(todoItems: self.todoItems, to: Constants.SQLiteFileName)
@@ -67,6 +70,7 @@ class SaveService {
                 case .failure(let error):
                     print(error)
                     self.delegate?.completeLoading()
+                    self.showActivityIndicator = false
                     
                     self.isDirty = true
 //                    self.todoItems = FileCache.load() /* For Core Data */
@@ -104,6 +108,7 @@ class SaveService {
         
         // MARK: - Dalete from server
         delegate?.startLoading()
+        showActivityIndicator = true
         networkService.deleteTodoItem(with: id, lastKnownRevision: revision) { [weak self] result in
             guard let self = self else { return }
             
@@ -113,11 +118,13 @@ class SaveService {
                     print("Successful delete from server")
                     self.revision = revision
                     self.delegate?.completeLoading()
+                    self.showActivityIndicator = false
                     self.retryNum = 0
                     
                 case.failure(let error):
                     print(error)
                     self.delegate?.completeLoading()
+                    self.showActivityIndicator = false
                     self.isDirty = true
                     self.executeWithExponentialRetry {
                         self.delete(withId: id)
@@ -157,6 +164,7 @@ class SaveService {
         
         // MARK: - Update item to server
         delegate?.startLoading()
+        showActivityIndicator = true
         networkService.updateTodoItem(updatingItem: item, lastKnownRevision: revision) { [weak self] result in
             guard let self = self else { return }
             
@@ -166,11 +174,13 @@ class SaveService {
                     print("Successful update to server")
                     self.revision = revision
                     self.delegate?.completeLoading()
+                    self.showActivityIndicator = false
                     self.retryNum = 0
                     
                 case .failure(let error):
                     print(error)
                     self.delegate?.completeLoading()
+                    self.showActivityIndicator = false
                     self.isDirty = true
                     self.executeWithExponentialRetry {
                         self.update(item)
@@ -205,6 +215,7 @@ class SaveService {
          
         // MARK: - Add item to server
         delegate?.startLoading()
+        showActivityIndicator = true
         networkService.createTodoItem(item, lastKnownRevision: revision) { [weak self] result in
             guard let self = self else { return }
             
@@ -214,11 +225,13 @@ class SaveService {
                     print("Successful adding to server")
                     self.revision = revision
                     self.delegate?.completeLoading()
+                    self.showActivityIndicator = false
                     self.retryNum = 0
                     
                 case .failure(let error):
                     print(error)
                     self.delegate?.completeLoading()
+                    self.showActivityIndicator = false
                     self.isDirty = true
                     self.executeWithExponentialRetry {
                         self.add(item)
@@ -240,6 +253,7 @@ class SaveService {
         
         // MARK: - Sync with server
         delegate?.startLoading()
+        showActivityIndicator = true
         networkService.updateTodoList(with: todoItems, lastKnownRevision: revision) { [weak self] result in
             guard let self = self else { return }
             
@@ -250,11 +264,13 @@ class SaveService {
                 self.todoItems = data.0
                 self.revision = data.1
                 self.delegate?.completeLoading()
+                self.showActivityIndicator = false
                 self.retryNum = 0
                 
             case .failure(let error):
                 print(error)
                 self.delegate?.completeLoading()
+                self.showActivityIndicator = false
                 self.executeWithExponentialRetry {
                     self.synchronization()
                 }
