@@ -77,7 +77,7 @@ struct TodoView: View {
                             
                             if isShowDatePicker {
                                 Divider()
-                                DatePicker("Picker", selection: $selectedDate, displayedComponents: .date)
+                                DatePicker("Picker", selection: $selectedDate, in: Date()..., displayedComponents: .date)
                                     .datePickerStyle(.graphical)
                                     .padding(.top, -8)
                                     .onChange(of: selectedDate) { newValue in
