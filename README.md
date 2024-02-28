@@ -19,10 +19,10 @@
 
 ## Скриншоты
 
-![main_page.png](images%2Fmain_page.png)
+<img src="https://github.com/Vl-VSV/YTodo/blob/main/images/main_page.png" width="252"/>
 Главный экран приложения, где отображаются все текущие задачи.
 
-![new_item_page.png](images%2Fnew_item_page.png)
+<img src="https://github.com/Vl-VSV/YTodo/blob/main/images/new_item_page.png" width="252"/>
 Экран создания новой задачи, где вы можете указать название и другие детали.
 
 ## Используемые технологии
